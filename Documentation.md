@@ -21,6 +21,7 @@ Third installment of the GPSI API.
 
 + Response 200 (application/json)
 
+    ```js
         [
             {
                 "id": "870h8dfhs9d8fg",
@@ -29,6 +30,7 @@ Third installment of the GPSI API.
                 "message": "Some message that is really important."
             }
         ]
+    ```
 
 ## Message [/driver/message]
 
@@ -42,6 +44,7 @@ Third installment of the GPSI API.
     
     + Body
     
+    ```js
             [
                 {
                     "to": "user",
@@ -51,6 +54,7 @@ Third installment of the GPSI API.
                     "message": "A message"
                 }
             ]
+     ```
 
 + Response 200
 
@@ -67,6 +71,7 @@ Third installment of the GPSI API.
 
 + Response 200 (application/json)
 
+    ```json
         [
             {
                 "id": "<Dispatch ID>",
@@ -77,6 +82,7 @@ Third installment of the GPSI API.
                 "timestamp": "2015-08-05T08:40:51"
             }
         ]
+    ```
 
 ## Dispatch Receipt [/driver/dispatch/receipt]
 
@@ -90,6 +96,8 @@ Third installment of the GPSI API.
             
     + Body
     
+        ```json
             "DispatchID"
+        ```
 
 + Response 200
