@@ -16,8 +16,13 @@ Third installment of the GPSI API.
     + Headers
     
             Session: <Valid session token>
-            Since: 2015-08-05T08:40:51
-            Until: 2015-08-05T08:40:52
+            
+    + Body
+    
+            {
+                "since": "2015-08-05T08:40:51",
+                "until": "2015-08-05T08:40:52"
+            }
 
 + Response 200 (application/json)
 
@@ -54,6 +59,26 @@ Third installment of the GPSI API.
 
 + Response 200
 
+## Message Receipt [/driver/message/receipt]
+
+### Send Message Receipt [POST]
+
++ Request
+
+    + Headers
+    
+            Session: <Valid session token>
+            
+    + Body
+    
+            [
+                {
+                    "id": "MessageID"
+                }
+            ]
+
++ Response 200
+
 ## Dispatch [/driver/dispatch]
 
 ### Get All Dispatches [GET]
@@ -63,7 +88,12 @@ Third installment of the GPSI API.
     + Headers
     
             Session: <Valid session token>
-            Since: 2015-08-05T08:40:51
+            
+    + Body
+            
+            {
+                "since": "2015-08-05T08:40:51"
+            }
 
 + Response 200 (application/json)
 
@@ -89,7 +119,9 @@ Third installment of the GPSI API.
             Session: <Valid session token>
             
     + Body
-    
-            "DispatchID"
+            
+            {
+                "id": "DispatchID"
+            }
 
 + Response 200
