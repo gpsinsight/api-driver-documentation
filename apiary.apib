@@ -7,22 +7,20 @@ Third installment of the GPSI API.
 
 ## Group Messaging
 
-## Messages [/messages]
+## Messages [/messages{?since}{?until}]
 
 ### Get All Messages [GET]
+
++ Parameters
+    
+    + since: `2015-08-05T08:40:51` (String,optional) - ISO8601 date
+    + until: `2015-08-05T08:40:51` (String,optional) - ISO8601 date
 
 + Request
 
     + Headers
     
             Session: <Valid session token>
-            
-    + Body
-    
-            {
-                "since": "2015-08-05T08:40:51",
-                "until": "2015-08-05T08:40:52"
-            }
 
 + Response 200 (application/json)
 
