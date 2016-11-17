@@ -12,7 +12,7 @@ Driver-centric API for GPS Insight.
 ### Authenticate [POST /session/authenticate/]
 
 + Request (application/json)
-    The <auth_code> will be sent to the driver's phone number, if the phone is registered to the right <ref_id>
+    The authcode will be sent to the driver's phone number, if the phone is registered to the right refid
     
     + Body
     
@@ -24,7 +24,7 @@ Driver-centric API for GPS Insight.
 + Response 200
 
 + Request (application/json)
-    The <auth_code> will be sent to the driver's phone number, if the serial number has a driver assigned, and that driver has a phone number.
+    If the serial number has a driver assigned, response will contain a session token
 
     + Body
     
@@ -35,38 +35,43 @@ Driver-centric API for GPS Insight.
 
 + Response 200
 
+        {
+            "session": <session_token>
+        }
 
-### Phone Number [GET /session/authenticate/{ref_id}?{phone_number}]
+
+### Phone Number [GET /session/authenticate/{?ref_id}{?phone_number}]
 
 + Parameters
     
-    + ref_id: 76 (Number, optional)
-    + phone_number: 2085678934 (Number, optional)
+    + ref_id: 76 (Number)
+    + phone_number: 2085678934 (Number)
 
 + Request (application/x-www-form-urlencoded)
-    The <auth_code> will be sent to the driver's phone number, if the phone is registered to the right <ref_id>
-
+    The authcode will be sent to the driver's phone number, if the phone is registered to the right refid
+            
     + Body
-    
-            phone_number=2085678934
             
 + Response 200
 
-### Serial Number [GET /session/authenticate/{ref_id}?{serial_number}]
+
+### Serial Number [GET /session/authenticate/{?ref_id}{?serial_number}]
 
 + Parameters 
 
-    + ref_id: 76 (Number, optional)
-    + serial_number: 12345678 (Number, optional)
+    + ref_id: 76 (Number)
+    + serial_number: 12345678 (Number)
 
 + Request (application/x-www-form-urlencoded)
-    The <auth_code> will be sent to the driver's phone number, if the serial number has a driver assigned, and that driver has a phone number.
-
-    + Body
+    If the serial number has a driver assigned, response will contain a session token
     
-            serial_number=12345678
+    + Body
 
 + Response 200
+
+        {
+            "session": <session_token>
+        }
 
 
 ## Authorize [/session/authorize/]
@@ -74,7 +79,7 @@ Driver-centric API for GPS Insight.
 ### Session from Auth Code [POST /session/authorize/]
 
 + Request (application/json)
-    The <auth_code> comes from the Authenticate method, but is not delivered as a response in the API.  It is only delivered to the driver's phone.
+    The authcode comes from the Authenticate method, but is not delivered as a response in the API.  It is only delivered to the driver's phone.
     
     + Body
     
@@ -85,33 +90,28 @@ Driver-centric API for GPS Insight.
     
 + Response 200
 
-        [
-            {
-                "session": <session_token>
-            }
-        ]
+        {
+            "session": <session_token>
+        }
 
-### Authorize Session from Auth Code [GET /session/authorize/{ref_id}/phone?{auth_code}]
+
+### Authorize Session from Auth Code [GET /session/authorize/{?ref_id}/phone{?auth_code}]
 
 + Parameters
     
-    + ref_id: 76 (Number, optional)
-    + auth_code: abcd (String, optional)
+    + ref_id: 76 (Number)
+    + auth_code: abcd (String)
     
 + Request (application/x-www-form-urlencoded)
-    The <auth_code> comes from the Authenticate method, but is not delivered as a response in the API.  It is only delivered to the driver's phone.
-
-    + Body
+    The authcode comes from the Authenticate method, but is not delivered as a response in the API.  It is only delivered to the driver's phone.
     
-            auth_code=<auth_code>
+    + Body
     
 + Response 200
 
-        [
-            {
-                "session": <session_token>
-            }
-        ]
+        {
+            "session": <session_token>
+        }
 
 ## Group Messaging
 
@@ -265,7 +265,7 @@ Driver-centric API for GPS Insight.
 
 + Parameters
 
-    + since: `2015-08-05T08:40:51` (String,optional) - ISO8601 date
+    + since: `2015-08-05T08:40:51` (String, optional) - ISO8601 date
 
 + Request
 
@@ -305,5 +305,5 @@ Driver-centric API for GPS Insight.
             {
                 "id": "DispatchID"
             }
-
+            
 + Response 200
