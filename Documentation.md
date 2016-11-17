@@ -9,10 +9,10 @@ Driver-centric API for GPS Insight.
 
 ## Authenticate [/session/authenticate/]
 
-### Authenticate [POST /session/authenticate/]
+### Authenticate Driver [POST /session/authenticate/]
 
 + Request (application/json)
-    The authcode will be sent to the driver's phone number, if the phone is registered to the right refid
+    The auth_code will be sent to the driver's phone number, if the phone is registered to the right ref_id
     
     + Body
     
@@ -24,13 +24,16 @@ Driver-centric API for GPS Insight.
 + Response 200
 
 + Request (application/json)
-    If the serial number has a driver assigned, response will contain a session token
+    If the hardware_key has a driver assigned, response can contain a session token, doing the session generation in one step.
 
+    + Headers
+    
+            Get-Record: true
     + Body
     
             {
                 "ref_id": 76,
-                "serial_number": 12345678
+                "hardware_key": 123456789101112
             }
 
 + Response 200
@@ -40,78 +43,23 @@ Driver-centric API for GPS Insight.
         }
 
 
-### Phone Number [GET /session/authenticate/{?ref_id}{?phone_number}]
+### Session from Auth Code [GET /session/authorize/{auth_code}]
 
 + Parameters
     
-    + ref_id: 76 (Number)
-    + phone_number: 2085678934 (Number)
-
-+ Request (application/x-www-form-urlencoded)
-    The authcode will be sent to the driver's phone number, if the phone is registered to the right refid
-            
-    + Body
-            
-+ Response 200
-
-
-### Serial Number [GET /session/authenticate/{?ref_id}{?serial_number}]
-
-+ Parameters 
-
-    + ref_id: 76 (Number)
-    + serial_number: 12345678 (Number)
-
-+ Request (application/x-www-form-urlencoded)
-    If the serial number has a driver assigned, response will contain a session token
-    
-    + Body
-
-+ Response 200
-
-        {
-            "session": <session_token>
-        }
-
-
-## Authorize [/session/authorize/]
-
-### Session from Auth Code [POST /session/authorize/]
-
-+ Request (application/json)
-    The authcode comes from the Authenticate method, but is not delivered as a response in the API.  It is only delivered to the driver's phone.
-    
-    + Body
-    
-            {
-                "ref_id": <driver_id>,
-                "auth_code": <auth_code>
-            }
-    
-+ Response 200
-
-        {
-            "session": <session_token>
-        }
-
-
-### Authorize Session from Auth Code [GET /session/authorize/{?ref_id}/phone{?auth_code}]
-
-+ Parameters
-    
-    + ref_id: 76 (Number)
     + auth_code: abcd (String)
     
-+ Request (application/x-www-form-urlencoded)
++ Request (application/json)
     The authcode comes from the Authenticate method, but is not delivered as a response in the API.  It is only delivered to the driver's phone.
-    
+
     + Body
-    
+
 + Response 200
 
         {
             "session": <session_token>
         }
+
 
 ## Group Messaging
 
