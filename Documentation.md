@@ -125,7 +125,8 @@ Driver-centric API for GPS Insight.
     
             {
                 "to": "user",
-                "message": "A message"
+                "message": "A message",
+                "created_time": "(optional) defaults to time of request",
                 "from_device": "mobile",
             }
 
