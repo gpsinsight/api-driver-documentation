@@ -125,10 +125,9 @@ Driver-centric API for GPS Insight.
     
             {
                 "to": "user",
-                "from": "Sum Yung Gai",
-                "from_type": "driver",
-                "device_type": "mobile",
-                "message": "A message"
+                "message": "A message",
+                "created_time": "(optional) defaults to time of request",
+                "from_device": "mobile",
             }
 
 + Response 200 (application/json)
