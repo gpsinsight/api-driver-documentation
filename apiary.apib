@@ -43,16 +43,16 @@ Driver-centric API for GPS Insight.
         }
 
 
-### Session from Auth Code [GET /session/authorize/{auth_code}]
+### Session from Auth Code [GET /session/authorize/]
 
-+ Parameters
-    
-    + auth_code: abcd (String)
     
 + Request (application/json)
     The authcode comes from the Authenticate method, but is not delivered as a response in the API.  It is only delivered to the driver's phone.
 
     + Body
+            {
+                "auth_code": "string",
+            }
 
 + Response 200
 
@@ -246,11 +246,5 @@ Driver-centric API for GPS Insight.
     + Headers
     
             Session: <Valid session token>
-            
-    + Body
-            
-            {
-                "id": "DispatchID"
-            }
             
 + Response 200
