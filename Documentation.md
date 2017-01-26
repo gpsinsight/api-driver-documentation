@@ -24,7 +24,7 @@ Driver-centric API for GPS Insight.
 + Response 200
 
 + Request (application/json)
-    If the hardware_key has a driver assigned, response can contain a session token, doing the session generation in one step.
+    If the serial_number has a driver assigned, response can contain a session token, doing the session generation in one step.
 
     + Headers
     
@@ -33,7 +33,7 @@ Driver-centric API for GPS Insight.
     
             {
                 "ref_id": 76,
-                "hardware_key": 123456789101112
+                "serial_number": 123456789101112
             }
 
 + Response 200
@@ -43,16 +43,16 @@ Driver-centric API for GPS Insight.
         }
 
 
-### Session from Auth Code [GET /session/authorize/{auth_code}]
+### Session from Auth Code [GET /session/authorize/]
 
-+ Parameters
-    
-    + auth_code: abcd (String)
     
 + Request (application/json)
     The authcode comes from the Authenticate method, but is not delivered as a response in the API.  It is only delivered to the driver's phone.
 
     + Body
+            {
+                "auth_code": "string",
+            }
 
 + Response 200
 
@@ -71,6 +71,7 @@ Driver-centric API for GPS Insight.
     
     + since: `2015-08-05T08:40:51` (String,optional) - ISO8601 date
     + until: `2015-08-05T08:40:51` (String,optional) - ISO8601 date
+	+ output_unix_time: `1` (Boolean,optional) - Resulting times as epoch time
 
 + Request
 
@@ -84,6 +85,8 @@ Driver-centric API for GPS Insight.
             {
                 "id": "870h8dfhs9d8fg",
                 "timestamp": "2015-08-05T08:40:51",
+				"read_dt": null,
+				"deleted_dt": null,
                 "from": "John Somebody",
                 "message": "Some message that is really important."
             }
@@ -126,8 +129,12 @@ Driver-centric API for GPS Insight.
             {
                 "to": "user",
                 "message": "A message",
+                "from_device": "device_id",
                 "created_time": "(optional) defaults to time of request",
-                "from_device": "mobile",
+				"read_dt": "(optional) automatically set read timestamp to provided time",
+				"deleted_dt": "(optional) automatically set deleted timestamp to provided time",
+				"parent_message_id": "(optional) relate to existing message",
+				"message_type": "(optional) type of message - default 'm'",
             }
 
 + Response 200 (application/json)
@@ -206,13 +213,14 @@ Driver-centric API for GPS Insight.
 
 ## Group Dispatching
 
-## Dispatch [/dispatch{?since}]
+## Dispatch [/dispatch{?since}{?until}]
 
 ### Get All Dispatches [GET]
 
 + Parameters
 
     + since: `2015-08-05T08:40:51` (String, optional) - ISO8601 date
+	+ until: `2017-06-15T08:00:00` (String, optional) - ISO8601 date
 
 + Request
 
@@ -225,11 +233,15 @@ Driver-centric API for GPS Insight.
         [
             {
                 "id": "<Dispatch ID>",
+				"to_type": "driver",
+				"to": "Driver001",
                 "latitude": 121.191,
                 "longitude": -100.231,
                 "address": "3210 N Butte St. Bremerton, WA 96753",
-                "note": "A really important note. Their dog will murder you.",
-                "timestamp": "2015-08-05T08:40:51"
+                "note": "A really important note.",
+                "timestamp": "2015-08-05T08:40:51",
+				"read_dt": null,
+				"deleted_dt": null
             }
         ]
 
@@ -246,11 +258,5 @@ Driver-centric API for GPS Insight.
     + Headers
     
             Session: <Valid session token>
-            
-    + Body
-            
-            {
-                "id": "DispatchID"
-            }
             
 + Response 200
