@@ -60,6 +60,45 @@ Driver-centric API for GPS Insight.
             "session": <session_token>
         }
 
+### FUTURE: Session Data Refresh [GET /session]
+
++ Request
+
+    + Headers
+    
+            Session: <Valid session token>
+			
++ Response 200
+
+		{
+			"session_data": {
+				"type":  "driver",
+				"ref_id":  "driver refid",
+				"account_id": "20054",
+				"identifier": "phone_number",
+				"phone_number": "6025551234",			
+			},
+			
+			"driver_data": {
+				"first_name": "Ned",
+				"last_name": "Ryerson",
+				"phone_number": "2125551220"
+			},
+			
+			"vehicle_data": {
+				'vehicle': "Vehicle 001",
+				'country': "US",
+				'license_state': "AZ",
+				'license_number': "VEH001",
+				'color': "ORNG",
+				'make': "MAZDA",
+				'model': "3 5D",
+				'model_year': "2005",
+				'odometer': "85135",			
+			},
+			
+			"permission_data": {}
+		}
 
 ## Group Messaging
 
@@ -260,3 +299,55 @@ Driver-centric API for GPS Insight.
             Session: <Valid session token>
             
 + Response 200
+
+## FUTURE: Driver Assignment
+
+### FUTURE: Assign Driver [POST /assign]
+
++ Parameters
+
+    + vin: CA1814003214 (String) - VIN to assign to active driver
+	+ effective: 2017-01-15T16:40:30-07:00 (String) - ISO8601 date
+	+ expires: 2017-01-31T23:59:59-07:00 (String, optional) - ISO8601 date
+
++ Request
+
+    + Headers
+    
+            Session: <Valid session token>
+
++ Response 200
+
+		{
+			'vehicle': "Vehicle 001",
+			'country': "US",
+			'license_state': "AZ",
+			'license_number': "VEH001",
+			'color': "ORNG",
+			'make': "MAZDA",
+			'model': "3 5D",
+			'model_year': "2005",
+			'odometer': "85135",			
+		}
+		
++ Reponse 400
+		
+		Specified VIN unknown to this account
+		
+
+### FUTURE: Unassign Driver [POST /unassign]
+
++ Parameters
+
+    + vin: CA1814003214 (String) - VIN to assign to active driver
+	+ expires: 2017-01-31T23:59:59-07:00 (String, optional) - ISO8601 date
+
++ Request
+
+    + Headers
+    
+            Session: <Valid session token>
+
++ Response 200
+
+		Driver unassigned
