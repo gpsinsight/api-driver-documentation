@@ -358,7 +358,7 @@ Driver-centric API for GPS Insight.
             "success": true
         }
 
-# DVIRs [/divir{?limit}]
+# DVIRs [/dvir{?limit}]
 
 ## Retrieve DVIRs [GET]
 Retrieves the list of dvirs
@@ -444,6 +444,25 @@ Retrieves the list of dvirs
         {
             "success": true
         }
+		
+## UPDATE a DVIR Record [/{dvir_id}]
+
++ Request (application/json)
+
+    + Headers
+    
+            Session: <Valid session token>
+    
+    + Body
+			{
+				"notes": "Adding notes about notes.."
+			}
+
++ Response 200 (application/json)
+
+        {
+            "success": true
+        }
 
 # DVIR Defect Code [/dvir_defect_code{?code_type}]
 
@@ -452,7 +471,7 @@ Retrieves the list of DVIR defect codes
 
 + Paramters
 
-    + code_type (optional, number) ... Maximum number of DVIR Defect Codes to retreive
+    + code_type vehicle|trailer (optional, String) ... Limit the resulting codes to a particular type
 
 + Request
 
@@ -466,11 +485,34 @@ Retrieves the list of DVIR defect codes
                 {
                     "defect_code_id": 1,
                     "name": "wheels",
-                    "code_type": 0
+                    "code_type": "vehicle"
                 },
                 {
                     "defect_code_id": 2,
                     "name": "hood",
-                    "code_type": 0
+                    "code_type": "vehicle"
                 },
             ]
+
+## DVIR Defects [{dvir_id}/defect/{dvir_defect_id}]
+
+## Update a Defect Record [POST]
+
++ Request (application/json)
+
+    + Headers
+    
+            Session: <Valid session token>
+    
+    + Body
+			{
+				"repaired_by": "Johnny Wrench",
+				"repaired_dt": "2016-10-01T09:50:00-7:00",
+				"repaired_notes": "Just a transmutation of your 110 into your 220."	
+			}
+
++ Response 200 (application/json)
+
+        {
+            "success": true
+        }
