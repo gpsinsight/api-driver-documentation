@@ -23,6 +23,10 @@ Driver-centric API for GPS Insight.
 
 + Response 200
 
+        {
+            "success": true
+        }
+
 + Request (application/json)
     If the serial_number has a driver assigned, response can contain a session token, doing the session generation in one step.
 
@@ -71,7 +75,7 @@ Driver-centric API for GPS Insight.
 + Response 200
 
 		{
-			"session_data": {
+			"session": {
 				"type":  "driver",
 				"ref_id":  "driver refid",
 				"account_id": "20054",
@@ -79,13 +83,13 @@ Driver-centric API for GPS Insight.
 				"phone_number": "6025551234",			
 			},
 			
-			"driver_data": {
+			"driver": {
 				"first_name": "Ned",
 				"last_name": "Ryerson",
 				"phone_number": "2125551220"
 			},
 			
-			"vehicle_data": {
+			"vehicle": {
 				'vehicle': "Vehicle 001",
 				'country': "US",
 				'license_state': "AZ",
@@ -308,7 +312,7 @@ Driver-centric API for GPS Insight.
 
     + vin: CA1814003214 (String) - VIN to assign to active driver
 	+ effective: 2017-01-15T16:40:30-07:00 (String) - ISO8601 date
-	+ expires: 2017-01-31T23:59:59-07:00 (String, optional) - ISO8601 date
+	+ expires (optional): 2017-01-31T23:59:59-07:00 (String, optional) - ISO8601 date
 
 + Request
 
@@ -339,8 +343,8 @@ Driver-centric API for GPS Insight.
 
 + Parameters
 
-    + vin: CA1814003214 (String) - VIN to assign to active driver
-	+ expires: 2017-01-31T23:59:59-07:00 (String, optional) - ISO8601 date
+    + vin: CA1814003214 (optional, String) - VIN to assign to active driver
+	+ expires (optional): 2017-01-31T23:59:59-07:00 (String, optional) - ISO8601 date
 
 + Request
 
@@ -350,4 +354,165 @@ Driver-centric API for GPS Insight.
 
 + Response 200
 
-		Driver unassigned
+        {
+            "success": true
+        }
+
+# DVIRs [/dvir{?limit}]
+
+## Retrieve DVIRs [GET]
+Retrieves the list of dvirs
+
++ Paramters
+
+    + limit (optional, number) ... Maximum number of DVIRs to retreive
+
++ Request
+
+    + Headers
+    
+            Session: <Valid session token>
+
++ Response 200 (application/json)
+
+            {
+                "dvir_id": 1,
+                "vin": "CA1234567890",
+                "defect_code_id": 1,
+                "is_trailer": false,
+                "trailer_name": "",
+                "shipment": "(only for trailers)",
+                "safety_status": true,
+                "inspection_type": "pre",
+                "notes": "example notes",
+                "created_by": 130323,
+                start_dt: "2017-03-02 22:10:20-07:00",
+                end_dt: "2017-03-02 22:20:20-07:00"
+                defects: [{
+                    "defect_id": 2,
+                    "defect_code_id":  1,
+                    "name": "odometer",
+                    "notes": "the miles aren't coming off",
+                    "repaired_by": "Alan",
+                    "repaired_dt": "1986-06-11 4:00:00-07:00",
+                    "repaired_notes": "fixed",
+                    "approved_by": "Matthew",
+                    "approved_dt": "1986-06-11 6:00:00-07:00",
+                    "approved_notes": "looks good",
+                    "priority":  1
+                }]
+            }
+
+## Create a DVIR [POST]
+
++ Request (application/json)
+
+    + Headers
+    
+            Session: <Valid session token>
+    
+    + Body
+    
+            {
+                "vin": "CA1234567890",
+                "defect_code_id": 1,
+                "is_trailer": false,
+                "trailer_name": "",
+                "shipment": "(only for trailers)",
+                "safety_status": true,
+                "inspection_type": "pre",
+                "notes": "example notes",
+                "created_by": 130323,
+                start_dt: "2017-03-02 22:10:20-07:00",
+                end_dt: "2017-03-02 22:20:20-07:00"
+                defects: [{
+                    "defect_code_id":  1,
+                    "name": "odometer",
+                    "notes": "the miles aren't coming off",
+                    "repaired_by": "Alan",
+                    "repaired_dt": "1986-06-11 4:00:00-07:00",
+                    "repaired_notes": "fixed",
+                    "approved_by": "Matthew",
+                    "approved_dt": "1986-06-11 6:00:00-07:00",
+                    "approved_notes": "looks good",
+                    "priority":  1
+                }]
+            }
+
++ Response 200 (application/json)
+
+        {
+            "success": true
+        }
+		
+## UPDATE a DVIR Record [/{dvir_id}]
+
++ Request (application/json)
+
+    + Headers
+    
+            Session: <Valid session token>
+    
+    + Body
+			{
+				"notes": "Adding notes about notes.."
+			}
+
++ Response 200 (application/json)
+
+        {
+            "success": true
+        }
+
+# DVIR Defect Code [/dvir_defect_code{?code_type}]
+
+## Retrieve DVIR Defect codes [GET]
+Retrieves the list of DVIR defect codes
+
++ Paramters
+
+    + code_type vehicle|trailer (optional, String) ... Limit the resulting codes to a particular type
+
++ Request
+
+    + Headers
+    
+            Session: <Valid session token>
+
++ Response 200 (application/json)
+
+            [
+                {
+                    "defect_code_id": 1,
+                    "name": "wheels",
+                    "code_type": "vehicle"
+                },
+                {
+                    "defect_code_id": 2,
+                    "name": "hood",
+                    "code_type": "vehicle"
+                },
+            ]
+
+## DVIR Defects [{dvir_id}/defect/{dvir_defect_id}]
+
+## Update a Defect Record [POST]
+
++ Request (application/json)
+
+    + Headers
+    
+            Session: <Valid session token>
+    
+    + Body
+			{
+				"repaired_by": "Johnny Wrench",
+				"repaired_dt": "2016-10-01T09:50:00-7:00",
+				"repaired_notes": "Just a transmutation of your 110 into your 220."	
+			}
+
++ Response 200 (application/json)
+
+        {
+            "success": true
+        }
