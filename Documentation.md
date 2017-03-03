@@ -71,38 +71,38 @@ Driver-centric API for GPS Insight.
     + Headers
     
             Session: <Valid session token>
-			
+            
 + Response 200
 
-		{
-			"session": {
-				"type":  "driver",
-				"ref_id":  "driver refid",
-				"account_id": "20054",
-				"identifier": "phone_number",
-				"phone_number": "6025551234",			
-			},
-			
-			"driver": {
-				"first_name": "Ned",
-				"last_name": "Ryerson",
-				"phone_number": "2125551220"
-			},
-			
-			"vehicle": {
-				'vehicle': "Vehicle 001",
-				'country': "US",
-				'license_state': "AZ",
-				'license_number': "VEH001",
-				'color': "ORNG",
-				'make': "MAZDA",
-				'model': "3 5D",
-				'model_year': "2005",
-				'odometer': "85135",			
-			},
-			
-			"permission_data": {}
-		}
+        {
+            "session": {
+                "type":  "driver",
+                "ref_id":  "driver refid",
+                "account_id": "20054",
+                "identifier": "phone_number",
+                "phone_number": "6025551234",            
+            },
+            
+            "driver": {
+                "first_name": "Ned",
+                "last_name": "Ryerson",
+                "phone_number": "2125551220"
+            },
+            
+            "vehicle": {
+                'vehicle': "Vehicle 001",
+                'country': "US",
+                'license_state': "AZ",
+                'license_number': "VEH001",
+                'color': "ORNG",
+                'make': "MAZDA",
+                'model': "3 5D",
+                'model_year': "2005",
+                'odometer': "85135",            
+            },
+            
+            "permission_data": {}
+        }
 
 ## Group Messaging
 
@@ -114,7 +114,7 @@ Driver-centric API for GPS Insight.
     
     + since: `2015-08-05T08:40:51` (String,optional) - ISO8601 date
     + until: `2015-08-05T08:40:51` (String,optional) - ISO8601 date
-	+ output_unix_time: `1` (Boolean,optional) - Resulting times as epoch time
+    + output_unix_time: `1` (Boolean,optional) - Resulting times as epoch time
 
 + Request
 
@@ -128,8 +128,8 @@ Driver-centric API for GPS Insight.
             {
                 "id": "870h8dfhs9d8fg",
                 "timestamp": "2015-08-05T08:40:51",
-				"read_dt": null,
-				"deleted_dt": null,
+                "read_dt": null,
+                "deleted_dt": null,
                 "from": "John Somebody",
                 "message": "Some message that is really important."
             }
@@ -174,10 +174,10 @@ Driver-centric API for GPS Insight.
                 "message": "A message",
                 "from_device": "device_id",
                 "created_time": "(optional) defaults to time of request",
-				"read_dt": "(optional) automatically set read timestamp to provided time",
-				"deleted_dt": "(optional) automatically set deleted timestamp to provided time",
-				"parent_message_id": "(optional) relate to existing message",
-				"message_type": "(optional) type of message - default 'm'",
+                "read_dt": "(optional) automatically set read timestamp to provided time",
+                "deleted_dt": "(optional) automatically set deleted timestamp to provided time",
+                "parent_message_id": "(optional) relate to existing message",
+                "message_type": "(optional) type of message - default 'm'",
             }
 
 + Response 200 (application/json)
@@ -263,7 +263,7 @@ Driver-centric API for GPS Insight.
 + Parameters
 
     + since: `2015-08-05T08:40:51` (String, optional) - ISO8601 date
-	+ until: `2017-06-15T08:00:00` (String, optional) - ISO8601 date
+    + until: `2017-06-15T08:00:00` (String, optional) - ISO8601 date
 
 + Request
 
@@ -276,15 +276,15 @@ Driver-centric API for GPS Insight.
         [
             {
                 "id": "<Dispatch ID>",
-				"to_type": "driver",
-				"to": "Driver001",
+                "to_type": "driver",
+                "to": "Driver001",
                 "latitude": 121.191,
                 "longitude": -100.231,
                 "address": "3210 N Butte St. Bremerton, WA 96753",
                 "note": "A really important note.",
                 "timestamp": "2015-08-05T08:40:51",
-				"read_dt": null,
-				"deleted_dt": null
+                "read_dt": null,
+                "deleted_dt": null
             }
         ]
 
@@ -311,8 +311,8 @@ Driver-centric API for GPS Insight.
 + Parameters
 
     + vin: CA1814003214 (String) - VIN to assign to active driver
-	+ effective: 2017-01-15T16:40:30-07:00 (String) - ISO8601 date
-	+ expires (optional): 2017-01-31T23:59:59-07:00 (String, optional) - ISO8601 date
+    + effective: 2017-01-15T16:40:30-07:00 (String) - ISO8601 date
+    + expires (optional): 2017-01-31T23:59:59-07:00 (String, optional) - ISO8601 date
 
 + Request
 
@@ -322,29 +322,29 @@ Driver-centric API for GPS Insight.
 
 + Response 200
 
-		{
-			'vehicle': "Vehicle 001",
-			'country': "US",
-			'license_state': "AZ",
-			'license_number': "VEH001",
-			'color': "ORNG",
-			'make': "MAZDA",
-			'model': "3 5D",
-			'model_year': "2005",
-			'odometer': "85135",			
-		}
-		
+        {
+            'vehicle': "Vehicle 001",
+            'country': "US",
+            'license_state': "AZ",
+            'license_number': "VEH001",
+            'color': "ORNG",
+            'make': "MAZDA",
+            'model': "3 5D",
+            'model_year': "2005",
+            'odometer': "85135",            
+        }
+        
 + Reponse 400
-		
-		Specified VIN unknown to this account
-		
+        
+        Specified VIN unknown to this account
+        
 
 ### FUTURE: Unassign Driver [POST /unassign]
 
 + Parameters
 
     + vin: CA1814003214 (optional, String) - VIN to assign to active driver
-	+ expires (optional): 2017-01-31T23:59:59-07:00 (String, optional) - ISO8601 date
+    + expires (optional): 2017-01-31T23:59:59-07:00 (String, optional) - ISO8601 date
 
 + Request
 
@@ -361,9 +361,10 @@ Driver-centric API for GPS Insight.
 # DVIRs [/dvir{?limit}]
 
 ## Retrieve DVIRs [GET]
+
 Retrieves the list of dvirs
 
-+ Paramters
++ Parameters
 
     + limit (optional, number) ... Maximum number of DVIRs to retreive
 
@@ -444,7 +445,7 @@ Retrieves the list of dvirs
         {
             "success": true
         }
-		
+        
 ## UPDATE a DVIR Record [/{dvir_id}]
 
 + Request (application/json)
@@ -454,9 +455,9 @@ Retrieves the list of dvirs
             Session: <Valid session token>
     
     + Body
-			{
-				"notes": "Adding notes about notes.."
-			}
+            {
+                "notes": "Adding notes about notes.."
+            }
 
 + Response 200 (application/json)
 
@@ -469,9 +470,9 @@ Retrieves the list of dvirs
 ## Retrieve DVIR Defect codes [GET]
 Retrieves the list of DVIR defect codes
 
-+ Paramters
++ Parameters
 
-    + code_type vehicle|trailer (optional, String) ... Limit the resulting codes to a particular type
+    + code_type: vehicle (optional, String) - Limit the resulting codes to a particular type
 
 + Request
 
@@ -505,11 +506,11 @@ Retrieves the list of DVIR defect codes
             Session: <Valid session token>
     
     + Body
-			{
-				"repaired_by": "Johnny Wrench",
-				"repaired_dt": "2016-10-01T09:50:00-7:00",
-				"repaired_notes": "Just a transmutation of your 110 into your 220."	
-			}
+            {
+                "repaired_by": "Johnny Wrench",
+                "repaired_dt": "2016-10-01T09:50:00-7:00",
+                "repaired_notes": "Just a transmutation of your 110 into your 220."    
+            }
 
 + Response 200 (application/json)
 
