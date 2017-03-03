@@ -54,6 +54,7 @@ Driver-centric API for GPS Insight.
     The authcode comes from the Authenticate method, but is not delivered as a response in the API.  It is only delivered to the driver's phone.
 
     + Body
+    
             {
                 "auth_code": "string",
             }
@@ -108,7 +109,7 @@ Driver-centric API for GPS Insight.
 
 ## Messages [/message/]
 
-### Get All Messages [GET /message/{?since}{?until}]
+### Get All Messages [GET /message/{?since}{?until}{?output_unix_time}]
 
 + Parameters
     
@@ -304,15 +305,15 @@ Driver-centric API for GPS Insight.
             
 + Response 200
 
-## FUTURE: Driver Assignment
+### FUTURE: Driver Assignment
 
-### FUTURE: Assign Driver [POST /assign]
+### FUTURE: Assign Driver [POST /assign{?vin}{?effective}{?expires}]
 
 + Parameters
 
     + vin: CA1814003214 (String) - VIN to assign to active driver
     + effective: 2017-01-15T16:40:30-07:00 (String) - ISO8601 date
-    + expires (optional): 2017-01-31T23:59:59-07:00 (String, optional) - ISO8601 date
+    + expires: 2017-01-31T23:59:59-07:00 (String, optional) - ISO8601 date
 
 + Request
 
@@ -334,17 +335,17 @@ Driver-centric API for GPS Insight.
             'odometer': "85135",            
         }
         
-+ Reponse 400
++ Response 400
         
         Specified VIN unknown to this account
         
 
-### FUTURE: Unassign Driver [POST /unassign]
+### FUTURE: Unassign Driver [POST /unassign{?vin}{?expires}]
 
 + Parameters
 
     + vin: CA1814003214 (optional, String) - VIN to assign to active driver
-    + expires (optional): 2017-01-31T23:59:59-07:00 (String, optional) - ISO8601 date
+    + expires: 2017-01-31T23:59:59-07:00 (String, optional) - ISO8601 date
 
 + Request
 
@@ -495,9 +496,9 @@ Retrieves the list of DVIR defect codes
                 },
             ]
 
-## DVIR Defects [{dvir_id}/defect/{dvir_defect_id}]
+### DVIR Defects [{dvir_id}/defect/{dvir_defect_id}]
 
-## Update a Defect Record [POST]
+### Update a Defect Record [POST]
 
 + Request (application/json)
 
@@ -506,6 +507,7 @@ Retrieves the list of DVIR defect codes
             Session: <Valid session token>
     
     + Body
+    
             {
                 "repaired_by": "Johnny Wrench",
                 "repaired_dt": "2016-10-01T09:50:00-7:00",
