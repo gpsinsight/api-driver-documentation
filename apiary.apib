@@ -376,7 +376,7 @@ Retrieves the list of dvirs
 
 + Response 200 (application/json)
 
-            {
+            [{
                 "dvir_id": 1,
                 "vin": "CA1234567890",
                 "defect_code_id": 1,
@@ -388,8 +388,10 @@ Retrieves the list of dvirs
                 "notes": "example notes",
                 "created_by": 130323,
                 "odometer":130111,
-                start_dt: "2017-03-02 22:10:20-07:00",
-                end_dt: "2017-03-02 22:20:20-07:00"
+                "start_dt": "2017-03-02 22:10:20-07:00",
+                "end_dt": "2017-03-02 22:20:20-07:00",
+                "approved_by": "Matthew",
+                "approved_dt": "1986-06-11 6:00:00-07:00",
                 defects: [{
                     "defect_id": 2,
                     "defect_code_id":  1,
@@ -398,12 +400,10 @@ Retrieves the list of dvirs
                     "repaired_by": "Alan",
                     "repaired_dt": "1986-06-11 4:00:00-07:00",
                     "repaired_notes": "fixed",
-                    "approved_by": "Matthew",
-                    "approved_dt": "1986-06-11 6:00:00-07:00",
                     "approved_notes": "looks good",
                     "priority":  1
                 }]
-            }
+            }]
 
 ## Create a DVIR [POST]
 
@@ -426,8 +426,10 @@ Retrieves the list of dvirs
                 "notes": "example notes",
                 "odometer":130111,
                 "created_by": 130323,
-                start_dt: "2017-03-02 22:10:20-07:00",
-                end_dt: "2017-03-02 22:20:20-07:00"
+                "start_dt": "2017-03-02 22:10:20-07:00",
+                "end_dt": "2017-03-02 22:20:20-07:00",
+                "approved_by": "Matthew",
+                "approved_dt": "1986-06-11 6:00:00-07:00",
                 defects: [{
                     "defect_code_id":  1,
                     "name": "odometer",
@@ -435,8 +437,6 @@ Retrieves the list of dvirs
                     "repaired_by": "Alan",
                     "repaired_dt": "1986-06-11 4:00:00-07:00",
                     "repaired_notes": "fixed",
-                    "approved_by": "Matthew",
-                    "approved_dt": "1986-06-11 6:00:00-07:00",
                     "approved_notes": "looks good",
                     "priority":  1
                 }]
