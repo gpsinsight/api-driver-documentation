@@ -305,7 +305,7 @@ Driver-centric API for GPS Insight.
             
 + Response 200
 
-## FUTURE: Driver Assignment
+### FUTURE: Driver Assignment
 
 ### FUTURE: Assign Driver [POST /assign{?vin}{?effective}{?expires}]
 
@@ -498,9 +498,9 @@ Retrieves the list of DVIR defect codes
                 },                
             ]
 
-## DVIR Defects [{dvir_id}/defect/{dvir_defect_id}]
+### DVIR Defects [{dvir_id}/defect/{dvir_defect_id}]
 
-## Update a Defect Record [POST]
+### Update a Defect Record [POST]
 
 + Request (application/json)
 
