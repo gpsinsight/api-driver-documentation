@@ -460,7 +460,7 @@ Retrieves the list of dvirs
             "success": true
         }
 
-# DVIR Defect Code [/dvir_defect_code{?code_type}]
+# DVIR Defect Code [/dvir/defect_codes{?code_type}]
 
 ## Retrieve DVIR Defect codes [GET]
 Retrieves the list of DVIR defect codes
@@ -498,7 +498,7 @@ Retrieves the list of DVIR defect codes
                 },                
             ]
 
-## DVIR Defects [{dvir_id}/defect/{dvir_defect_id}]
+## DVIR Defects [/dvir/{dvir_id}/defect/{dvir_defect_id}]
 
 ## Update a Defect Record [POST]
 
