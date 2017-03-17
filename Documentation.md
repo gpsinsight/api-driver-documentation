@@ -307,11 +307,12 @@ Driver-centric API for GPS Insight.
 
 ## FUTURE: Driver Assignment
 
-### FUTURE: Assign Driver [POST /assign{?vin}{?effective}{?expires}]
+### FUTURE: Assign Driver [POST /assign{?vin}(?vehicle}{?effective}{?expires}]
 
 + Parameters
 
     + vin: CA1814003214 (String) - VIN to assign to active driver
+	+ vehicle: TAHOE01 (String, optional) - Specify vehicle descriptor in leu of VIN
     + effective: 2017-01-15T16:40:30-07:00 (String) - ISO8601 date
     + expires: 2017-01-31T23:59:59-07:00 (String, optional) - ISO8601 date
 
@@ -340,11 +341,15 @@ Driver-centric API for GPS Insight.
         Specified VIN unknown to this account
         
 
-### FUTURE: Unassign Driver [POST /unassign{?vin}{?expires}]
+### FUTURE: Unassign Driver [POST /unassign{?vin}{?vehicle}{?expires}]
+
+Assigns a driver to a target vehicle, and also returns the last DVIR committed for that vehicle (if available). 
+If no previous DVIR is available, it will be NULL.
 
 + Parameters
 
     + vin: CA1814003214 (optional, String) - VIN to assign to active driver
+	+ vehicle: TAHOE01 (String, optional) - Specify vehicle descriptor in leu of VIN
     + expires: 2017-01-31T23:59:59-07:00 (String, optional) - ISO8601 date
 
 + Request
@@ -356,7 +361,8 @@ Driver-centric API for GPS Insight.
 + Response 200
 
         {
-            "success": true
+            "success": true,
+			"dvir": { ... }
         }
 
 # DVIRs [/dvir{?limit}]
@@ -377,7 +383,7 @@ Retrieves the list of dvirs
 
 + Response 200 (application/json)
 
-            {
+            [{
                 "dvir_id": 1,
                 "vin": "CA1234567890",
                 "defect_code_id": 1,
@@ -386,24 +392,29 @@ Retrieves the list of dvirs
                 "shipment": "(only for trailers)",
                 "safety_status": true,
                 "inspection_type": "pre",
-                "notes": "example notes",
+                "notes": [
+					{ "note_type": "general",
+					"note": "A general note",
+					"inserted_dt": "2017-03-02 22:10:20-07:00"
+					}
+				],
                 "created_by": 130323,
-                start_dt: "2017-03-02 22:10:20-07:00",
-                end_dt: "2017-03-02 22:20:20-07:00"
-                defects: [{
+                "start_dt": "2017-03-02 22:10:20-07:00",
+                "end_dt": "2017-03-02 22:20:20-07:00",
+				"approved_by": null,
+				"approved_dt": null,
+                "defects": [{
                     "defect_id": 2,
                     "defect_code_id":  1,
                     "name": "odometer",
                     "notes": "the miles aren't coming off",
                     "repaired_by": "Alan",
                     "repaired_dt": "1986-06-11 4:00:00-07:00",
-                    "repaired_notes": "fixed",
-                    "approved_by": "Matthew",
-                    "approved_dt": "1986-06-11 6:00:00-07:00",
-                    "approved_notes": "looks good",
+					"notes": [],
                     "priority":  1
                 }]
-            }
+            }, ...
+			]
 
 ## Create a DVIR [POST]
 
