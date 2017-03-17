@@ -393,16 +393,17 @@ Retrieves the list of dvirs
                 "safety_status": true,
                 "inspection_type": "pre",
                 "notes": [
-					"note_type": "general",
+					{ "note_type": "general",
 					"note": "A general note",
 					"inserted_dt": "2017-03-02 22:10:20-07:00"
+					}
 				],
                 "created_by": 130323,
-                start_dt: "2017-03-02 22:10:20-07:00",
-                end_dt: "2017-03-02 22:20:20-07:00",
+                "start_dt": "2017-03-02 22:10:20-07:00",
+                "end_dt": "2017-03-02 22:20:20-07:00",
 				"approved_by": null,
 				"approved_dt": null,
-                defects: [{
+                "defects": [{
                     "defect_id": 2,
                     "defect_code_id":  1,
                     "name": "odometer",
