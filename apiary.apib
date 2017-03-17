@@ -383,7 +383,7 @@ Retrieves the list of dvirs
 
 + Response 200 (application/json)
 
-            [{
+            {
                 "dvir_id": 1,
                 "vin": "CA1234567890",
                 "defect_code_id": 1,
@@ -394,9 +394,9 @@ Retrieves the list of dvirs
                 "inspection_type": "pre",
                 "notes": [
                     { "note_type": "general",
-                    "note": "A general note",
-                    "inserted_dt": "2017-03-02 22:10:20-07:00"
-					}
+                      "note": "A general note",
+                      "inserted_dt": "2017-03-02 22:10:20-07:00"
+					          }
                 ],
                 "created_by": 130323,
                 "start_dt": "2017-03-02 22:10:20-07:00",
@@ -410,7 +410,10 @@ Retrieves the list of dvirs
                     "notes": "the miles aren't coming off",
                     "repaired_by": "Alan",
                     "repaired_dt": "1986-06-11 4:00:00-07:00",
-                    "notes": [],
+                    "repaired_notes": "fixed",
+                    "approved_by": "Matthew",
+                    "approved_dt": "1986-06-11 6:00:00-07:00",
+                    "approved_notes": "looks good",
                     "priority":  1
                 }]
             }, ...
@@ -471,7 +474,7 @@ Retrieves the list of dvirs
             "success": true
         }
 
-# DVIR Defect Code [/dvir_defect_code{?code_type}]
+# DVIR Defect Code [/dvir/defect_codes{?code_type}]
 
 ## Retrieve DVIR Defect codes [GET]
 Retrieves the list of DVIR defect codes
@@ -509,7 +512,7 @@ Retrieves the list of DVIR defect codes
                 },                
             ]
 
-## DVIR Defects [{dvir_id}/defect/{dvir_defect_id}]
+## DVIR Defects [/dvir/{dvir_id}/defect/{dvir_defect_id}]
 
 ## Update a Defect Record [POST]
 
