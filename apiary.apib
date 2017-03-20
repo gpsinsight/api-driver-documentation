@@ -396,7 +396,7 @@ Retrieves the list of dvirs
                     { "note_type": "general",
                       "note": "A general note",
                       "inserted_dt": "2017-03-02 22:10:20-07:00"
-					          }
+                              }
                 ],
                 "created_by": 130323,
                 "start_dt": "2017-03-02 22:10:20-07:00",
@@ -407,14 +407,16 @@ Retrieves the list of dvirs
                     "defect_id": 2,
                     "defect_code_id":  1,
                     "name": "odometer",
-                    "notes": "the miles aren't coming off",
                     "repaired_by": "Alan",
                     "repaired_dt": "1986-06-11 4:00:00-07:00",
-                    "repaired_notes": "fixed",
                     "approved_by": "Matthew",
                     "approved_dt": "1986-06-11 6:00:00-07:00",
-                    "approved_notes": "looks good",
-                    "priority":  1
+                    "priority":  1,
+                    "notes": [
+                        { "note_type": "general", "inserted_dt": "1986-06-11 08:30:00-07:00", "note": "the miles aren't coming off" },
+                        { "note_type": "approval", "inserted_dt": "1986-06-12 11:41:00-07:00", "note": "DVIR approved" },
+                        { "note_type": "repair", "inserted_dt": "1986-06-14 08:30:00-07:00", "note": "odometer fixed" }
+                    ]
                 }]
             }, ...
             ]
@@ -438,13 +440,14 @@ Retrieves the list of dvirs
                 "start_dt": "2017-03-02 22:10:20-07:00",
                 "end_dt": "2017-03-02 22:20:20-07:00"
                 defects: [{
-                    "notes": "the miles aren't coming off",
+                    "defect_code_id': 1,
+                    "notes": [
+                        { "note_type": "general", "inserted_dt": "1986-06-11 08:30:00-07:00", "note": "the miles aren't coming off" }
+                    ],
                     "repaired_by": "Alan",
                     "repaired_dt": "1986-06-11 4:00:00-07:00",
-                    "repaired_notes": "fixed",
                     "approved_by": "Matthew",
                     "approved_dt": "1986-06-11 6:00:00-07:00",
-                    "approved_notes": "looks good",
                     "priority":  1
                 }]
             }
