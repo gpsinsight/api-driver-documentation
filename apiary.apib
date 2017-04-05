@@ -485,6 +485,7 @@ Retrieves the list of DVIR defect codes
 + Parameters
 
     + code_type: vehicle (optional, String) - Limit the resulting codes to a particular type
+    + subcodes: 1 (optional, Number) - Include subcodes in response (default is '0')
 
 + Request
 
@@ -499,19 +500,27 @@ Retrieves the list of DVIR defect codes
                     "defect_code_id": 1,
                     "account_id": null,
                     "name": "turn signal",
-                    "code_type": "vehicle"
+                    "code_type": "vehicle",
+                    "subcodes": []
                 },
                 {
                     "defect_code_id": 2,
                     "account_id": null,
                     "name": "hood",
-                    "code_type": "vehicle"
+                    "code_type": "vehicle",
+                    "subcodes": []
                 },
                 {
                     "defect_code_id": 3,
                     "account_id": null,
                     "name": "hood",
-                    "code_type": "both"
+                    "code_type": "both",
+                    "subcodes": [
+                        "sub_defect_code_id": 1,
+                        "defect_code_id": 3,
+                        "name": "Dented",
+                        "code_type": "both"                    
+                    ]
                 },                
             ]
             
