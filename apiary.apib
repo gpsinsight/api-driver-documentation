@@ -485,6 +485,7 @@ Retrieves the list of DVIR defect codes
 + Parameters
 
     + code_type: vehicle (optional, String) - Limit the resulting codes to a particular type
+    + subcodes: 1 (optional, Number) - Include subcodes in response (default is '0')
 
 + Request
 
@@ -499,21 +500,69 @@ Retrieves the list of DVIR defect codes
                     "defect_code_id": 1,
                     "account_id": null,
                     "name": "turn signal",
-                    "code_type": "vehicle"
+                    "code_type": "vehicle",
+                    "subcodes": []
                 },
                 {
                     "defect_code_id": 2,
                     "account_id": null,
                     "name": "hood",
-                    "code_type": "vehicle"
+                    "code_type": "vehicle",
+                    "subcodes": []
                 },
                 {
                     "defect_code_id": 3,
                     "account_id": null,
                     "name": "hood",
-                    "code_type": "both"
+                    "code_type": "both",
+                    "subcodes": [
+                        "sub_defect_code_id": 1,
+                        "defect_code_id": 3,
+                        "name": "Dented",
+                        "code_type": "both"                    
+                    ]
                 },                
             ]
+            
+# DVIR Sub Defect Code [/dvir/sub_defect_codes{?code_type}(?defect_code_id)]
+
+## Retrieve DVIR Sub Defect codes [GET]
+Retrieves the list of DVIR "sub-defect" codes.
+
++ Parameters
+
+    + code_type: vehicle (optional, String) - Limit the resulting codes to a particular type
+    + defect_code_id: 414 (optional, Number) - Limit the resulting codes to those of a particular Defect Code ID.
+
++ Request
+
+    + Headers
+    
+            Session: <Valid session token>
+
++ Response 200 (application/json)
+
+            [
+                {
+                    "sub_defect_code_id": 1,
+                    "defect_code_id": 1,
+                    "name": "Broken",
+                    "code_type": "vehicle"
+                },
+                {
+                    "sub_defect_code_id": 2,
+                    "defect_code_id": 1,
+                    "name": "Cracked",
+                    "code_type": "vehicle"
+                },
+                {
+                    "sub_defect_code_id": 3,
+                    "defect_code_id": 2,
+                    "name": "Underinflated",
+                    "code_type": "both"
+                },
+            ]
+            
 
 ## DVIR Defects [/dvir/{dvir_id}/defect/{dvir_defect_id}]
 
