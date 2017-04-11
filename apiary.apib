@@ -65,7 +65,7 @@ Driver-centric API for GPS Insight.
             "session": <session_token>
         }
 
-### FUTURE: Session Data Refresh [GET /session]
+### Session Data Refresh [GET /session]
 
 + Request
 
@@ -305,9 +305,32 @@ Driver-centric API for GPS Insight.
             
 + Response 200
 
-## FUTURE: Driver Assignment
+## Driver Details
 
-### FUTURE: Assign Driver [POST /assign{?vin}(?vehicle}{?effective}{?expires}]
+### Retrieve Driver Details [/info{?driver_id}{?phone_number}]
+
++ Parameters
+
+    + driver_id: 14512311 (Number, optional) - Driver ID to look up
+    + phone_number: 6025551234 (Number, optional) - Phone number of driver to look up
+
++ Request
+
+    + Headers
+    
+            Session: <Valid session token>
+
++ Response 200
+
+        {
+            "fname": "Tracey",
+            "lname": "Cherrytree",
+            "refid": "tc1015",
+        }
+        
+## Driver Assignment
+
+### Assign Driver [POST /assign{?vin}(?vehicle}{?effective}{?expires}]
 
 + Parameters
 
@@ -341,7 +364,7 @@ Driver-centric API for GPS Insight.
         Specified VIN unknown to this account
         
 
-### FUTURE: Unassign Driver [POST /unassign{?vin}{?vehicle}{?expires}]
+### Unassign Driver [POST /unassign{?vin}{?vehicle}{?expires}]
 
 Assigns a driver to a target vehicle, and also returns the last DVIR committed for that vehicle (if available). 
 If no previous DVIR is available, it will be NULL.
