@@ -102,7 +102,7 @@ Driver-centric API for GPS Insight.
                 'odometer': "85135",            
             },
             
-            "permission_data": {}
+            "permission": ["dvir"]
         }
 
 ## Group Messaging
