@@ -323,8 +323,8 @@ Driver-centric API for GPS Insight.
 + Response 200
 
         {
-            "fname": "Tracey",
-            "lname": "Cherrytree",
+            "first_name": "Tracey",
+            "last_name": "Cherrytree",
             "refid": "tc1015",
         }
         
