@@ -357,15 +357,7 @@ Driver-centric API for GPS Insight.
 + Response 200
 
         {
-            'vehicle': "Vehicle 001",
-            'country': "US",
-            'license_state': "AZ",
-            'license_number': "VEH001",
-            'color': "ORNG",
-            'make': "MAZDA",
-            'model': "3 5D",
-            'model_year': "2005",
-            'odometer': "85135",            
+            "success": true
         }
         
 + Response 400
