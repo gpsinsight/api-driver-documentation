@@ -75,35 +75,44 @@ Driver-centric API for GPS Insight.
             
 + Response 200
 
-        {
-            "session": {
-                "type":  "driver",
-                "ref_id":  "driver refid",
-                "account_id": "20054",
-                "identifier": "phone_number",
-                "phone_number": "6025551234",            
-            },
-            
-            "driver": {
-                "first_name": "Ned",
-                "last_name": "Ryerson",
-                "phone_number": "2125551220"
-            },
-            
-            "vehicle": {
-                'vehicle': "Vehicle 001",
-                'country': "US",
-                'license_state': "AZ",
-                'license_number': "VEH001",
-                'color': "ORNG",
-                'make': "MAZDA",
-                'model': "3 5D",
-                'model_year': "2005",
-                'odometer': "85135",            
-            },
-            
-            "permission": ["dvir"]
-        }
+{
+    "session": {
+        "type": "phone_number",
+        "identifier": "6028881234",
+        "auth_token": "9bf7f62b1ecafe43243d38cae96c95dc91218b34",
+        "driver_ref_id": "6028881234",
+        "driver_id": 4567023,
+        "account_id": "1013997",
+        "active": "1",
+        "fname": "Dvir",
+        "lname": "Driver",
+        "tz_offset": "-7",
+        "email_address": "email.address@gpsinsight.com",
+        "phone_number": "6028881234",
+        "vin": "CA1111111127",
+        "vehicle": "Qa Suburu"
+    },
+    "permission": [],
+    "driver": {
+        "first_name": "Dvir",
+        "last_name": "Driver",
+        "phone_number": "6028881234"
+    },
+    "vehicle": {
+        "vehicle": "Qa Suburu",
+        "vin": "CA1111111127",
+        "vin2": "CA1111111127",
+        "country": "US",
+        "license_state": "AZ",
+        "license_number": "ABC890",
+        "color": "Red",
+        "make": "Suburu",
+        "model": "Outback",
+        "model_year": "2007",
+        "odometer": "28364",
+        "serial_number": "1111111127"
+    }
+}
 
 ## Group Messaging
 
