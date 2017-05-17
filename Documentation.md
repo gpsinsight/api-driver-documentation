@@ -5,6 +5,11 @@ HOST: https://api.gpsinsight.com/driver/
 
 Driver-centric API for GPS Insight.
 
+## API Channel Headers
+
+Include `X-Channel` and additionally `X-Channel-Version` (if applicable) in order to contextualize your request from a particular channel. Certain requests may be rejected or not behave as expected if you do not provide appropriate accurate information. 
+
+
 ## Group Session
 
 ## Authenticate [/session/authenticate/]
