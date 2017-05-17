@@ -343,8 +343,8 @@ Driver-centric API for GPS Insight.
 
 + Parameters
 
-    + vin: CA1814003214 (String) - VIN to assign to active driver
-    + vehicle: TAHOE01 (String, optional) - Specify vehicle descriptor in leu of VIN
+    + vin: CA1814003214 (String) - GPSI VIN to assign to active driver
+    + vehicle: TAHOE01 (String, optional) - Specify vehicle exact descriptor, partial descriptor, or "true" VIN in leu of GPSI VIN
     + effective: 2017-01-15T16:40:30-07:00 (String) - ISO8601 date
     + expires: 2017-01-31T23:59:59-07:00 (String, optional) - ISO8601 date
 
