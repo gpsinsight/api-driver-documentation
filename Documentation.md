@@ -128,6 +128,11 @@ Include `X-Channel` and additionally `X-Channel-Version` (if applicable) in orde
 	
 			Session: <Valid session token>
 			X-Channel: <Valid channel ID>
+			
+	+ Body 
+            {
+                "token": "adef3434931bef4aa132312"
+            }
 		
 + Response 200
 		
