@@ -118,6 +118,28 @@ Include `X-Channel` and additionally `X-Channel-Version` (if applicable) in orde
 				"serial_number": "1111111127"
 			}
 		}
+		
+### Mobile Push Notification (MPN) Token Registration [POST /session/register_mpn]
+
++ Request
+	In order to properly validate your token, you must submit a valid mobile channel ID header (e.g. `driver_android`). 
+
+	+ Headers
+	
+			Session: <Valid session token>
+			X-Channel: <Valid channel ID>
+			
+	+ Body 
+            {
+                "token": "adef3434931bef4aa132312"
+            }
+		
++ Response 200
+		
+			{
+				"success": true
+			}
+
 
 ## Group Messaging
 
