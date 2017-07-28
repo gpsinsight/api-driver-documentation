@@ -366,6 +366,41 @@ Include `X-Channel` and additionally `X-Channel-Version` (if applicable) in orde
 
 ## Driver Summary
 
+### Retrieve Trip Details [GET /info/trip_detail]
+
+In the current incarnation, it returns the GPS points for the last movement trip for this driver.
+
++ Parameters
+	
+	+ start_date: 2017-01-01T00:00:00-07:00 (ISO8601 Date, not implemented) - Minimum date for results
+	+ end_date: 2017-01-01T00:00:00-07:00 (ISO8601 Date, not implemented) - Minimum date for results
+	+ vehicle: GMC Yukon (String, optional) - Get last trip with this driver for this vehicle
+	+ max_points: 15 (Number, optional) - Limit to only the last _x_ points
+	
++ Request
+
+	+ Headers
+	
+			Session: <Valid session token>
+
++ Response 200
+			{
+				"trip_id": "2015815713",
+				"miles_driven": "36.2",
+				"duration_hours": "0.91",
+				"start_time": "2017-04-04 07:28:18",
+				"end_time": "2017-04-04 08:22:47",
+				"start_address": "9350 E Golden St, Mesa, AZ 85207",
+				"end_address": "Frontage Rd, Scottsdale, AZ 85255",
+				"points": [
+					{ 'fix_time_utf': '2017-06-15 14:23:32',
+					  'latitude': '39.223889',
+					  'longitude': '-108.865'
+					},
+					{ ... }
+				]
+			}
+
 ### Retrieve Trip Summaries [GET /info/summary]
 
 + Parameters
