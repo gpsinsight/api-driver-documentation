@@ -522,15 +522,15 @@ If no previous DVIR is available, it will be NULL.
             "dvir": { ... }
         }
 
-# DVIRs [/dvir{?limit}]
+## DVIRs [/dvir]
 
-## Retrieve DVIRs [GET]
+### Retrieve Lastest DVIR [GET /dvir/latest{?vehicle}]
 
-Retrieves the list of dvirs
+Retrieves the latest DVIR for the vehicle specified (or, by default, the vehicle associated to the current session.)
 
 + Parameters
 
-    + limit (optional, number) ... Maximum number of DVIRs to retreive
+	+ vehicle (optional, String) ... Vehicle context of your request (VIN, descriptor, serial number, etc.) Defaults to assigned vehicle.
 
 + Request
 
@@ -549,36 +549,101 @@ Retrieves the list of dvirs
                 "shipment": "(only for trailers)",
                 "safety_status": true,
                 "inspection_type": "pre",
-                "notes": [
-                    { "note_type": "general",
-                      "note": "A general note",
-                      "inserted_dt": "2017-03-02 22:10:20-07:00"
-					          }
-                ],
                 "created_by": 130323,
                 "start_dt": "2017-03-02 22:10:20-07:00",
                 "end_dt": "2017-03-02 22:20:20-07:00",
-                "approved_by": null,
-                "approved_dt": null,
+				"has_trailers": false,
                 "defects": [{
                     "defect_id": 2,
                     "defect_code_id":  1,
                     "name": "odometer",
                     "repaired_by": "Alan",
                     "repaired_dt": "1986-06-11 4:00:00-07:00",
-                    "approved_by": "Matthew",
-                    "approved_dt": "1986-06-11 6:00:00-07:00",
                     "priority":  1,
 					"notes": [
-						{ "note_type": "general", "inserted_dt": "1986-06-11 08:30:00-07:00", "note": "the miles aren't coming off" },
-						{ "note_type": "approval", "inserted_dt": "1986-06-12 11:41:00-07:00", "note": "DVIR approved" },
-						{ "note_type": "repair", "inserted_dt": "1986-06-14 08:30:00-07:00", "note": "odometer fixed" }
+						{ "note_type": "general", "inserted_dt": "1986-06-11 08:30:00-07:00", "note": "the miles aren't coming off" }
+					]
+                }]
+            }
+			
+### Retrieve DVIRs [GET /dvir{?limit}{?vehicle}]
+
+Retrieves the list of dvirs
+
++ Parameters
+
+    + limit (optional, number) ... Maximum number of DVIRs to retreive
+	+ vehicle (optional, String) ... Vehicle context of your request (VIN, descriptor, serial number, etc.) Defaults to assigned vehicle.
+
++ Request
+
+    + Headers
+    
+            Session: <Valid session token>
+
++ Response 200 (application/json)
+
+            [{
+                "dvir_id": 1,
+                "vin": "CA1234567890",
+                "defect_code_id": 1,
+                "is_trailer": false,
+                "trailer_name": "",
+                "shipment": "(only for trailers)",
+                "safety_status": true,
+                "inspection_type": "pre",
+                "created_by": 130323,
+                "start_dt": "2017-03-02 22:10:20-07:00",
+                "end_dt": "2017-03-02 22:20:20-07:00",
+				"has_trailers": false,
+                "defects": [{
+                    "defect_id": 2,
+                    "defect_code_id":  1,
+                    "name": "odometer",
+                    "repaired_by": "Alan",
+                    "repaired_dt": "1986-06-11 4:00:00-07:00",
+                    "priority":  1,
+					"notes": [
+						{ "note_type": "general", "inserted_dt": "1986-06-11 08:30:00-07:00", "note": "the miles aren't coming off" }
 					]
                 }]
             }, ...
             ]
 
-## Create a DVIR [POST]
+### Retrieve Latest Trailer DVIRs [GET /dvir/trailers/latest{?vehicle}]
+
+Retrieves the latest DVIR records for the trailers associated to the vehicle specified.
+
++ Parameters
+
+	+ vehicle (optional, String) ... Vehicle context of your request (VIN, descriptor, serial number, etc.) Defaults to assigned vehicle.
+
++ Request
+
+    + Headers
+    
+            Session: <Valid session token>
+
++ Response 200 (application/json)
+
+            [
+			{
+                "dvir_id": 191,
+                "vin": "CA1234567890",
+                "is_trailer": true,
+                "trailer_name": "Trailer010",
+                "shipment": "119131",
+                "safety_status": true,
+                "inspection_type": "pre",
+                "created_by": 130323,
+                "start_dt": "2017-03-02 22:10:20-07:00",
+                "end_dt": "2017-03-02 22:20:20-07:00",
+				"has_trailers": false,
+                "defects": []
+            }, ...
+			]
+
+### Create a DVIR [POST]
 
 + Request (application/json)
 
@@ -598,13 +663,7 @@ Retrieves the list of dvirs
                 "end_dt": "2017-03-02 22:20:20-07:00"
                 defects: [{
 					"defect_code_id': 1,
-					"notes": [
-						{ "note_type": "general", "inserted_dt": "1986-06-11 08:30:00-07:00", "note": "the miles aren't coming off" }
-					],
-                    "repaired_by": "Alan",
-                    "repaired_dt": "1986-06-11 4:00:00-07:00",
-                    "approved_by": "Matthew",
-                    "approved_dt": "1986-06-11 6:00:00-07:00",
+					"sub_defect_code_id": 3,
                     "priority":  1
                 }]
             }
@@ -615,7 +674,7 @@ Retrieves the list of dvirs
             "success": true
         }
         
-## UPDATE a DVIR Record [/{dvir_id}]
+### UPDATE a DVIR Record [/{dvir_id}]
 
 + Request (application/json)
 
@@ -634,15 +693,14 @@ Retrieves the list of dvirs
             "success": true
         }
 
-# DVIR Defect Code [/dvir/defect_codes{?code_type}]
+## DVIR Defect Code [/dvir/defect_codes{?code_type}]
 
-## Retrieve DVIR Defect codes [GET]
-Retrieves the list of DVIR defect codes
+### Retrieve DVIR Defect codes [GET]
+Retrieves the list of DVIR defect and sub-defect codes
 
 + Parameters
 
     + code_type: vehicle (optional, String) - Limit the resulting codes to a particular type
-	+ subcodes: 1 (optional, Number) - Include subcodes in response (default is '0')
 
 + Request
 
@@ -681,9 +739,9 @@ Retrieves the list of DVIR defect codes
                 },                
             ]
 			
-# DVIR Sub Defect Code [/dvir/sub_defect_codes{?code_type}(?defect_code_id)]
+## DVIR Sub Defect Code [/dvir/sub_defect_codes{?code_type}(?defect_code_id)]
 
-## Retrieve DVIR Sub Defect codes [GET]
+### Retrieve DVIR Sub Defect codes [GET]
 Retrieves the list of DVIR "sub-defect" codes.
 
 + Parameters
@@ -723,7 +781,7 @@ Retrieves the list of DVIR "sub-defect" codes.
 
 ## DVIR Defects [/dvir/{dvir_id}/defect/{dvir_defect_id}]
 
-## Update a Defect Record [POST]
+### Update a Defect Record [POST]
 
 + Request (application/json)
 
@@ -735,8 +793,8 @@ Retrieves the list of DVIR "sub-defect" codes.
     
             {
                 "repaired_by": "Johnny Wrench",
-                "repaired_dt": "2016-10-01T09:50:00-7:00",
-                "repaired_notes": "Just a transmutation of your 110 into your 220."    
+                "repaired_dt": "2016-10-01T09:50:00-7:00"
+				"priority": 0
             }
 
 + Response 200 (application/json)
