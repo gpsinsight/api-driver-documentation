@@ -25,6 +25,7 @@ issue tracker. This allows us to take appropriate actions to mitigate the issues
 
 All content (c) Copyright 2017 GPS Insight, LLC, all rights reserved.
 
+[gps-insight]: https://www.gpsinsight.com/
 [ios-app]: https://itunes.apple.com/us/app/gps-insight-driver/id1105003062?mt=8
 [android-app]: https://play.google.com/store/apps/details?id=com.gpsinsight.driver&hl=en-US
 [apiary]: http://docs.gpsinsightdriver.apiary.io/#
