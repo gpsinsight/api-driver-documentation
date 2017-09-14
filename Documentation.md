@@ -7,7 +7,7 @@ Driver-centric API for GPS Insight.
 
 ## API Channel Headers
 
-Include `X-Channel` and additionally `X-Channel-Version` (if applicable) in order to contextualize your request from a particular channel. Certain requests may be rejected or not behave as expected if you do not provide appropriate accurate information. 
+Include `X-Channel` and additionally `X-Channel-Version` (if applicable) in order to contextualize your request from a particular channel. Certain requests may be rejected or not behave as expected if you do not provide appropriate accurate information.
 
 
 ## Group Session
@@ -18,9 +18,9 @@ Include `X-Channel` and additionally `X-Channel-Version` (if applicable) in orde
 
 + Request (application/json)
     The auth_code will be sent to the driver's phone number, if the phone is registered to the right ref_id
-    
+
     + Body
-    
+
             {
                 "ref_id": 76,
                 "phone_number": 2085678934
@@ -36,10 +36,10 @@ Include `X-Channel` and additionally `X-Channel-Version` (if applicable) in orde
     If the serial_number has a driver assigned, response can contain a session token, doing the session generation in one step.
 
     + Headers
-    
+
             Get-Record: true
     + Body
-    
+
             {
                 "ref_id": 76,
                 "serial_number": 123456789101112
@@ -54,12 +54,12 @@ Include `X-Channel` and additionally `X-Channel-Version` (if applicable) in orde
 
 ### Session from Auth Code [GET /session/authorize/]
 
-    
+
 + Request (application/json)
     The authcode comes from the Authenticate method, but is not delivered as a response in the API.  It is only delivered to the driver's phone.
 
     + Body
-    
+
             {
                 "auth_code": "string",
             }
@@ -75,9 +75,9 @@ Include `X-Channel` and additionally `X-Channel-Version` (if applicable) in orde
 + Request
 
     + Headers
-    
+
             Session: <Valid session token>
-            
+
 + Response 200
 
 		{
@@ -118,24 +118,24 @@ Include `X-Channel` and additionally `X-Channel-Version` (if applicable) in orde
 				"serial_number": "1111111127"
 			}
 		}
-		
+
 ### Mobile Push Notification (MPN) Token Registration [POST /session/register_mpn]
 
 + Request
-	In order to properly validate your token, you must submit a valid mobile channel ID header (e.g. `driver_android`). 
+	In order to properly validate your token, you must submit a valid mobile channel ID header (e.g. `driver_android`).
 
 	+ Headers
-	
+
 			Session: <Valid session token>
 			X-Channel: <Valid channel ID>
-			
-	+ Body 
+
+	+ Body
             {
                 "token": "adef3434931bef4aa132312"
             }
-		
+
 + Response 200
-		
+
 			{
 				"success": true
 			}
@@ -148,7 +148,7 @@ Include `X-Channel` and additionally `X-Channel-Version` (if applicable) in orde
 ### Get All Messages [GET /message/{?since}{?until}{?output_unix_time}]
 
 + Parameters
-    
+
     + since: `2015-08-05T08:40:51` (String,optional) - ISO8601 date
     + until: `2015-08-05T08:40:51` (String,optional) - ISO8601 date
     + output_unix_time: `1` (Boolean,optional) - Resulting times as epoch time
@@ -156,7 +156,7 @@ Include `X-Channel` and additionally `X-Channel-Version` (if applicable) in orde
 + Request
 
     + Headers
-    
+
             Session: <Valid session token>
 
 + Response 200 (application/json)
@@ -175,13 +175,13 @@ Include `X-Channel` and additionally `X-Channel-Version` (if applicable) in orde
 ### Get a Message [GET /message/{id}]
 
 + Parameters
-    
+
     + id: `870h8dfhs9d8fg` (String, optional)
 
 + Request
 
     + Headers
-    
+
             Session: <Valid session token>
 
 + Response 200 (application/json)
@@ -200,12 +200,12 @@ Include `X-Channel` and additionally `X-Channel-Version` (if applicable) in orde
 + Request (application/json)
 
     + Headers
-    
+
             Session: <Valid session token>
             Get-Record: false
-    
+
     + Body
-    
+
             {
                 "to": "user",
                 "message": "A message",
@@ -226,12 +226,12 @@ Include `X-Channel` and additionally `X-Channel-Version` (if applicable) in orde
 + Request (application/json)
 
     + Headers
-    
+
             Session: <Valid session token>
             Get-Record: true
-    
+
     + Body
-    
+
             {
                 "to": "user",
                 "from": "Sum Yung Gai",
@@ -263,7 +263,7 @@ Include `X-Channel` and additionally `X-Channel-Version` (if applicable) in orde
 + Request
 
     + Headers
-    
+
             Session: <Valid session token>
 
 + Response 200
@@ -274,17 +274,19 @@ Include `X-Channel` and additionally `X-Channel-Version` (if applicable) in orde
 + Request
 
     + Headers
-    
+
             Session: <Valid session token>
-            
+
     + Body
-    
+
             [
                 {
                     "id": 123
-                },{
+                },
+                {
                     "id": 124
-                },{
+                },
+                {
                     "id": 125
                 }
             ]
@@ -305,7 +307,7 @@ Include `X-Channel` and additionally `X-Channel-Version` (if applicable) in orde
 + Request
 
     + Headers
-    
+
             Session: <Valid session token>
 
 + Response 200 (application/json)
@@ -336,14 +338,14 @@ Include `X-Channel` and additionally `X-Channel-Version` (if applicable) in orde
 + Request
 
     + Headers
-    
+
             Session: <Valid session token>
-            
+
 + Response 200
 
-## Driver Details
+## Group Driver Details
 
-### Retrieve Driver Details [/info{?driver_id}{?phone_number}]
+### Get Driver Details [GET /info{?driver_id}{?phone_number}]
 
 + Parameters
 
@@ -353,7 +355,7 @@ Include `X-Channel` and additionally `X-Channel-Version` (if applicable) in orde
 + Request
 
     + Headers
-    
+
             Session: <Valid session token>
 
 + Response 200
@@ -371,16 +373,16 @@ Include `X-Channel` and additionally `X-Channel-Version` (if applicable) in orde
 In the current incarnation, it returns the GPS points for the last movement trip for this driver.
 
 + Parameters
-	
+
 	+ start_date: 2017-01-01T00:00:00-07:00 (ISO8601 Date, not implemented) - Minimum date for results
 	+ end_date: 2017-01-01T00:00:00-07:00 (ISO8601 Date, not implemented) - Minimum date for results
 	+ vehicle: GMC Yukon (String, optional) - Get last trip with this driver for this vehicle
 	+ max_points: 15 (Number, optional) - Limit to only the last _x_ points
-	
+
 + Request
 
 	+ Headers
-	
+
 			Session: <Valid session token>
 
 + Response 200
@@ -406,12 +408,12 @@ In the current incarnation, it returns the GPS points for the last movement trip
 + Parameters
 
     + start_date: 2017-01-01T00:00:00-07:00 (ISO8601 Date, optional) - Minimum date for results
-	+ end_date: 2017-06-01T00:00:00-07:00 (ISO8601 Date, optional) - Maximum date for results	
+	+ end_date: 2017-06-01T00:00:00-07:00 (ISO8601 Date, optional) - Maximum date for results
 	+ results: 15 (Number, optional) -- Limit of results to return.
 + Request
 
     + Headers
-    
+
             Session: <Valid session token>
 
 + Response 200
@@ -445,12 +447,12 @@ In the current incarnation, it returns the GPS points for the last movement trip
 + Parameters
 
     + start_date: 2017-01-01T00:00:00-07:00 (ISO8601 Date, optional) - Minimum date for results
-	+ end_date: 2017-06-01T00:00:00-07:00 (ISO8601 Date, optional) - Maximum date for results	
+	+ end_date: 2017-06-01T00:00:00-07:00 (ISO8601 Date, optional) - Maximum date for results
 	+ results: 15 (Number, optional) -- Limit of results to return.
 + Request
 
     + Headers
-    
+
             Session: <Valid session token>
 
 + Response 200
@@ -470,9 +472,9 @@ In the current incarnation, it returns the GPS points for the last movement trip
 			{ ... }
 		]
 
-## Driver Assignment
+## Group Driver Assignment
 
-### Assign Driver [POST /assign{?vin}(?vehicle}{?effective}{?expires}]
+### Assign Driver [POST /assign{?vin}{?vehicle}{?effective}{?expires}]
 
 + Parameters
 
@@ -484,24 +486,21 @@ In the current incarnation, it returns the GPS points for the last movement trip
 + Request
 
     + Headers
-    
+
             Session: <Valid session token>
 
 + Response 200
 
         {
-            "success": true
+            'success': true
         }
-        
+
 + Response 400
-        
+
         Specified VIN unknown to this account
-        
+
 
 ### Unassign Driver [POST /unassign{?vin}{?vehicle}{?expires}]
-
-Assigns a driver to a target vehicle, and also returns the last DVIR committed for that vehicle (if available). 
-If no previous DVIR is available, it will be NULL.
 
 + Parameters
 
@@ -510,9 +509,11 @@ If no previous DVIR is available, it will be NULL.
     + expires: 2017-01-31T23:59:59-07:00 (String, optional) - ISO8601 date
 
 + Request
+    Assigns a driver to a target vehicle, and also returns the last DVIR committed for that vehicle (if available).
+    If no previous DVIR is available, it will be NULL.
 
     + Headers
-    
+
             Session: <Valid session token>
 
 + Response 200
@@ -522,20 +523,22 @@ If no previous DVIR is available, it will be NULL.
             "dvir": { ... }
         }
 
-## DVIRs [/dvir]
+## Group DVIR
 
-### Retrieve Lastest DVIR [GET /dvir/latest{?vehicle}]
+## Vehicle Inspection Report [/dvir]
 
-Retrieves the latest DVIR for the vehicle specified (or, by default, the vehicle associated to the current session.)
+### Lastest DVIR [GET /dvir/latest{?vehicle}]
 
 + Parameters
 
-	+ vehicle (optional, String) ... Vehicle context of your request (VIN, descriptor, serial number, etc.) Defaults to assigned vehicle.
+    + vehicle (optional, String) ... Vehicle context of your request (VIN, descriptor, serial number, etc.) Defaults to assigned vehicle.
+
 
 + Request
+    Retrieves the latest DVIR for the vehicle specified (or, by default, the vehicle associated to the current session.)
 
     + Headers
-    
+
             Session: <Valid session token>
 
 + Response 200 (application/json)
@@ -565,10 +568,8 @@ Retrieves the latest DVIR for the vehicle specified (or, by default, the vehicle
 					]
                 }]
             }
-			
-### Retrieve DVIRs [GET /dvir{?limit}{?vehicle}]
 
-Retrieves the list of dvirs
+### DVIR List [GET /dvir{?limit}{?vehicle}]
 
 + Parameters
 
@@ -576,9 +577,10 @@ Retrieves the list of dvirs
 	+ vehicle (optional, String) ... Vehicle context of your request (VIN, descriptor, serial number, etc.) Defaults to assigned vehicle.
 
 + Request
+    Retrieves the list of dvirs
 
     + Headers
-    
+
             Session: <Valid session token>
 
 + Response 200 (application/json)
@@ -610,18 +612,17 @@ Retrieves the list of dvirs
             }, ...
             ]
 
-### Retrieve Latest Trailer DVIRs [GET /dvir/trailers/latest{?vehicle}]
-
-Retrieves the latest DVIR records for the trailers associated to the vehicle specified.
+### Latest Trailer DVIRs [GET /dvir/trailers/latest{?vehicle}]
 
 + Parameters
 
 	+ vehicle (optional, String) ... Vehicle context of your request (VIN, descriptor, serial number, etc.) Defaults to assigned vehicle.
 
 + Request
+    Retrieves the latest DVIR records for the trailers associated to the vehicle specified.
 
     + Headers
-    
+
             Session: <Valid session token>
 
 + Response 200 (application/json)
@@ -643,16 +644,16 @@ Retrieves the latest DVIR records for the trailers associated to the vehicle spe
             }, ...
 			]
 
-### Create a DVIR [POST]
+### Create a DVIR [POST  /dvir]
 
 + Request (application/json)
 
     + Headers
-    
+
             Session: <Valid session token>
-    
+
     + Body
-    
+
             {
                 "is_trailer": false,
                 "safety_status": true,
@@ -673,16 +674,17 @@ Retrieves the latest DVIR records for the trailers associated to the vehicle spe
         {
             "success": true
         }
-        
-### UPDATE a DVIR Record [/{dvir_id}]
+
+### Update a DVIR [POST /dvir/{dvir_id}]
 
 + Request (application/json)
 
     + Headers
-    
+
             Session: <Valid session token>
-    
+
     + Body
+
             {
                 "notes": "Adding notes about notes.."
             }
@@ -693,19 +695,20 @@ Retrieves the latest DVIR records for the trailers associated to the vehicle spe
             "success": true
         }
 
-## DVIR Defect Code [/dvir/defect_codes{?code_type}]
 
-### Retrieve DVIR Defect codes [GET]
-Retrieves the list of DVIR defect and sub-defect codes
+## DVIR Defects [/dvir/defect_codes]
+
+### Get Defect Codes [GET /dvir/defect_codes{?code_type}]
 
 + Parameters
 
     + code_type: vehicle (optional, String) - Limit the resulting codes to a particular type
 
 + Request
+    Retrieves the list of DVIR defect and sub-defect codes
 
     + Headers
-    
+
             Session: <Valid session token>
 
 + Response 200 (application/json)
@@ -716,81 +719,77 @@ Retrieves the list of DVIR defect and sub-defect codes
                     "account_id": null,
                     "name": "turn signal",
                     "code_type": "vehicle",
-					"subcodes": []
+                    "subcodes": []
                 },
                 {
                     "defect_code_id": 2,
                     "account_id": null,
                     "name": "hood",
                     "code_type": "vehicle",
-					"subcodes": []
+                    "subcodes": []
                 },
                 {
                     "defect_code_id": 3,
                     "account_id": null,
                     "name": "hood",
                     "code_type": "both",
-					"subcodes": [
-						"sub_defect_code_id": 1,
-						"defect_code_id": 3,
-						"name": "Dented",
-						"code_type": "both"					
-					]
-                },                
+                    "subcodes": [
+                        "sub_defect_code_id": 1,
+                        "defect_code_id": 3,
+                        "name": "Dented",
+                        "code_type": "both"
+                    ]
+                },
             ]
-			
-## DVIR Sub Defect Code [/dvir/sub_defect_codes{?code_type}(?defect_code_id)]
 
-### Retrieve DVIR Sub Defect codes [GET]
-Retrieves the list of DVIR "sub-defect" codes.
+### Get Sub Defect Codes [GET /dvir/sub_defect_codes{?code_type}{?defect_code_id}]
 
 + Parameters
 
     + code_type: vehicle (optional, String) - Limit the resulting codes to a particular type
-	+ defect_code_id: 414 (optional, Number) - Limit the resulting codes to those of a particular Defect Code ID.
+    + defect_code_id: 414 (optional, Number) - Limit the resulting codes to those of a particular Defect Code ID.
 
 + Request
+    Retrieves the list of DVIR "sub-defect" codes.
 
     + Headers
-    
+
             Session: <Valid session token>
 
 + Response 200 (application/json)
 
             [
                 {
-					"sub_defect_code_id": 1,
+                    "sub_defect_code_id": 1,
                     "defect_code_id": 1,
                     "name": "Broken",
                     "code_type": "vehicle"
                 },
                 {
-					"sub_defect_code_id": 2,
+                    "sub_defect_code_id": 2,
                     "defect_code_id": 1,
                     "name": "Cracked",
                     "code_type": "vehicle"
                 },
                 {
-					"sub_defect_code_id": 3,
+                    "sub_defect_code_id": 3,
                     "defect_code_id": 2,
                     "name": "Underinflated",
                     "code_type": "both"
                 },
             ]
-			
 
-## DVIR Defects [/dvir/{dvir_id}/defect/{dvir_defect_id}]
 
-### Update a Defect Record [POST]
+### Update a Defect Record [POST /dvir/{dvir_id}/defect/{dvir_defect_id}]
 
 + Request (application/json)
 
     + Headers
-    
+
             Session: <Valid session token>
-    
+
     + Body
-    
+
             {
                 "repaired_by": "Johnny Wrench",
                 "repaired_dt": "2016-10-01T09:50:00-7:00"
