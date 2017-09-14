@@ -80,65 +80,66 @@ Include `X-Channel` and additionally `X-Channel-Version` (if applicable) in orde
 
 + Response 200
 
-		{
-			"session": {
-				"type": "phone_number",
-				"identifier": "6028881234",
-				"auth_token": "9bf7f62b1ecafe43243d38cae96c95dc91218b34",
-				"driver_ref_id": "6028881234",
-				"driver_id": 4567023,
-				"account_id": "1013997",
-				"active": "1",
-				"fname": "Dvir",
-				"lname": "Driver",
-				"tz_offset": "-7",
-				"email_address": "email.address@gpsinsight.com",
-				"phone_number": "6028881234",
-				"vin": "CA1111111127",
-				"vehicle": "Qa Suburu"
-			},
-			"permission": [],
-			"driver": {
-				"first_name": "Dvir",
-				"last_name": "Driver",
-				"phone_number": "6028881234"
-			},
-			"vehicle": {
-				"vehicle": "Qa Suburu",
-				"vin": "CA1111111127",
-				"vin2": "CA1111111127",
-				"country": "US",
-				"license_state": "AZ",
-				"license_number": "ABC890",
-				"color": "Red",
-				"make": "Suburu",
-				"model": "Outback",
-				"model_year": "2007",
-				"odometer": "28364",
-				"serial_number": "1111111127"
-			}
-		}
+        {
+            "session": {
+                "type": "phone_number",
+                "identifier": "6028881234",
+                "auth_token": "9bf7f62b1ecafe43243d38cae96c95dc91218b34",
+                "driver_ref_id": "6028881234",
+                "driver_id": 4567023,
+                "account_id": "1013997",
+                "active": "1",
+                "fname": "Dvir",
+                "lname": "Driver",
+                "tz_offset": "-7",
+                "email_address": "email.address@gpsinsight.com",
+                "phone_number": "6028881234",
+                "vin": "CA1111111127",
+                "vehicle": "Qa Suburu"
+            },
+            "permission": [],
+            "driver": {
+                "first_name": "Dvir",
+                "last_name": "Driver",
+                "phone_number": "6028881234"
+            },
+            "vehicle": {
+                "vehicle": "Qa Suburu",
+                "vin": "CA1111111127",
+                "vin2": "CA1111111127",
+                "country": "US",
+                "license_state": "AZ",
+                "license_number": "ABC890",
+                "color": "Red",
+                "make": "Suburu",
+                "model": "Outback",
+                "model_year": "2007",
+                "odometer": "28364",
+                "serial_number": "1111111127"
+            }
+        }
 
 ### Mobile Push Notification (MPN) Token Registration [POST /session/register_mpn]
 
 + Request
-	In order to properly validate your token, you must submit a valid mobile channel ID header (e.g. `driver_android`).
+    In order to properly validate your token, you must submit a valid mobile channel ID header (e.g. `driver_android`).
 
-	+ Headers
+    + Headers
 
-			Session: <Valid session token>
-			X-Channel: <Valid channel ID>
+            Session: <Valid session token>
+            X-Channel: <Valid channel ID>
 
-	+ Body
+    + Body
+    
             {
                 "token": "adef3434931bef4aa132312"
             }
 
 + Response 200
 
-			{
-				"success": true
-			}
+            {
+                "success": true
+            }
 
 
 ## Group Messaging
@@ -252,7 +253,7 @@ Include `X-Channel` and additionally `X-Channel-Version` (if applicable) in orde
         }
 
 
-## Message Receipt [/message/receipt/]
+## Message Receipt [/message/receipt]
 
 ### Send Message Receipt [POST /message/receipt/{id}]
 
@@ -295,9 +296,9 @@ Include `X-Channel` and additionally `X-Channel-Version` (if applicable) in orde
 
 ## Group Dispatching
 
-## Dispatch [/dispatch{?since}{?until}]
+## Dispatch [/dispatch]
 
-### Get All Dispatches [GET]
+### Get All Dispatches [GET /dispatch{?since}{?until}]
 
 + Parameters
 
@@ -327,9 +328,7 @@ Include `X-Channel` and additionally `X-Channel-Version` (if applicable) in orde
             }
         ]
 
-## Dispatch Receipt [/dispatch/receipt/{id}]
-
-### Send Dispatch Receipt [POST]
+### Send Dispatch Receipt [POST /dispatch/receipt/{id}]
 
 + Parameters
 
@@ -345,7 +344,9 @@ Include `X-Channel` and additionally `X-Channel-Version` (if applicable) in orde
 
 ## Group Driver Details
 
-### Get Driver Details [GET /info{?driver_id}{?phone_number}]
+## Driver Details [/info]
+
+### Get Driver Info [GET /info{?driver_id}{?phone_number}]
 
 + Parameters
 
@@ -366,50 +367,49 @@ Include `X-Channel` and additionally `X-Channel-Version` (if applicable) in orde
             "refid": "tc1015",
         }
 
-## Driver Summary
-
-### Retrieve Trip Details [GET /info/trip_detail]
-
-In the current incarnation, it returns the GPS points for the last movement trip for this driver.
+### Get Trip Details [GET /info/trip_detail{?start_date}{?end_date}{?vehicle}{?max_points}]
 
 + Parameters
 
-	+ start_date: 2017-01-01T00:00:00-07:00 (ISO8601 Date, not implemented) - Minimum date for results
-	+ end_date: 2017-01-01T00:00:00-07:00 (ISO8601 Date, not implemented) - Minimum date for results
-	+ vehicle: GMC Yukon (String, optional) - Get last trip with this driver for this vehicle
-	+ max_points: 15 (Number, optional) - Limit to only the last _x_ points
+    + start_date: 2017-01-01T00:00:00-07:00 (ISO8601 Date, not implemented) - Minimum date for results
+    + end_date: 2017-01-01T00:00:00-07:00 (ISO8601 Date, not implemented) - Minimum date for results
+    + vehicle: GMC Yukon (String, optional) - Get last trip with this driver for this vehicle
+    + max_points: 10 (Number, optional) - Limit to only the last X points
 
 + Request
+    In the current incarnation, it returns the GPS points for the last movement trip for this driver.
 
-	+ Headers
+    + Headers
 
-			Session: <Valid session token>
+            Session: <Valid session token>
 
 + Response 200
-			{
-				"trip_id": "2015815713",
-				"miles_driven": "36.2",
-				"duration_hours": "0.91",
-				"start_time": "2017-04-04 07:28:18",
-				"end_time": "2017-04-04 08:22:47",
-				"start_address": "9350 E Golden St, Mesa, AZ 85207",
-				"end_address": "Frontage Rd, Scottsdale, AZ 85255",
-				"points": [
-					{ 'fix_time_utf': '2017-06-15 14:23:32',
-					  'latitude': '39.223889',
-					  'longitude': '-108.865'
-					},
-					{ ... }
-				]
-			}
 
-### Retrieve Trip Summaries [GET /info/summary]
+        {
+            "trip_id": "2015815713",
+            "miles_driven": "36.2",
+            "duration_hours": "0.91",
+            "start_time": "2017-04-04 07:28:18",
+            "end_time": "2017-04-04 08:22:47",
+            "start_address": "9350 E Golden St, Mesa, AZ 85207",
+            "end_address": "Frontage Rd, Scottsdale, AZ 85255",
+            "points": [
+                { 
+                    'fix_time_utf': '2017-06-15 14:23:32',
+                    'latitude': '39.223889',
+                    'longitude': '-108.865'
+                },
+                { ... }
+            ]
+        }
+
+### Get Trip Summaries [GET /info/summary{?start_date}{?end_date}{?results}]
 
 + Parameters
 
     + start_date: 2017-01-01T00:00:00-07:00 (ISO8601 Date, optional) - Minimum date for results
-	+ end_date: 2017-06-01T00:00:00-07:00 (ISO8601 Date, optional) - Maximum date for results
-	+ results: 15 (Number, optional) -- Limit of results to return.
+    + end_date: 2017-06-01T00:00:00-07:00 (ISO8601 Date, optional) - Maximum date for results
+    + results: 15 (Number, optional) -- Limit of results to return.
 + Request
 
     + Headers
@@ -418,37 +418,38 @@ In the current incarnation, it returns the GPS points for the last movement trip
 
 + Response 200
 
-		[
-			{
-				"summary_dt":"2017-05-30 00:00:00",
-				"miles_driven":"71.3",
-				"mpg":"0",
-				"time_on":"5101",
-				"time_idle":"599"
-			},
-			{
-				"summary_dt":"2017-05-29 00:00:00",
-				"miles_driven":"50.9",
-				"mpg":"0",
-				"time_on":"5814",
-				"time_idle":"1177"
-			},
-			{
-				"summary_dt":"2017-05-28 00:00:00",
-				"miles_driven":"19.2",
-				"mpg":"0",
-				"time_on":"3700",
-				"time_idle":"834"
-			}
-		]
+        [
+            {
+                "summary_dt":"2017-05-30 00:00:00",
+                "miles_driven":"71.3",
+                "mpg":"0",
+                "time_on":"5101",
+                "time_idle":"599"
+            },
+            {
+                "summary_dt":"2017-05-29 00:00:00",
+                "miles_driven":"50.9",
+                "mpg":"0",
+                "time_on":"5814",
+                "time_idle":"1177"
+            },
+            {
+                "summary_dt":"2017-05-28 00:00:00",
+                "miles_driven":"19.2",
+                "mpg":"0",
+                "time_on":"3700",
+                "time_idle":"834"
+            }
+        ]
 
-### Retrieve Previous Vehicle Assignments [GET /info/assignment_history]
+### Get Previous Vehicle Assignments [GET /info/assignment_history{?start_date}{?end_date}{?results}]
 
 + Parameters
 
     + start_date: 2017-01-01T00:00:00-07:00 (ISO8601 Date, optional) - Minimum date for results
-	+ end_date: 2017-06-01T00:00:00-07:00 (ISO8601 Date, optional) - Maximum date for results
-	+ results: 15 (Number, optional) -- Limit of results to return.
+    + end_date: 2017-06-01T00:00:00-07:00 (ISO8601 Date, optional) - Maximum date for results
+    + results: 15 (Number, optional) -- Limit of results to return.
+
 + Request
 
     + Headers
@@ -457,22 +458,22 @@ In the current incarnation, it returns the GPS points for the last movement trip
 
 + Response 200
 
-		[
-			{
-				"effective_dt":"2017-06-12 14:12:44",
-				"expiration_dt":"2017-06-12 14:12:44",
-				"vehicle":"Qa Suburu",
-				"vin":"CA1111111127",
-				"vin2":"CA1111111127",
-				"serial_number":"1111111127",
-				"gpsi_vehicle_id":"7500201366",
-				"license_state":"AZ",
-				"license_number":"ABC890"
-			},
-			{ ... }
-		]
+        [
+            {
+                "effective_dt":"2017-06-12 14:12:44",
+                "expiration_dt":"2017-06-12 14:12:44",
+                "vehicle":"Qa Suburu",
+                "vin":"CA1111111127",
+                "vin2":"CA1111111127",
+                "serial_number":"1111111127",
+                "gpsi_vehicle_id":"7500201366",
+                "license_state":"AZ",
+                "license_number":"ABC890"
+            },
+            { ... }
+        ]
 
-## Group Driver Assignment
+## Driver Assignment [/assign]
 
 ### Assign Driver [POST /assign{?vin}{?vehicle}{?effective}{?expires}]
 
@@ -543,38 +544,40 @@ In the current incarnation, it returns the GPS points for the last movement trip
 
 + Response 200 (application/json)
 
-            {
-                "dvir_id": 1,
-                "vin": "CA1234567890",
-                "defect_code_id": 1,
-                "is_trailer": false,
-                "trailer_name": "",
-                "shipment": "(only for trailers)",
-                "safety_status": true,
-                "inspection_type": "pre",
-                "created_by": 130323,
-                "start_dt": "2017-03-02 22:10:20-07:00",
-                "end_dt": "2017-03-02 22:20:20-07:00",
-				"has_trailers": false,
-                "defects": [{
-                    "defect_id": 2,
-                    "defect_code_id":  1,
-                    "name": "odometer",
-                    "repaired_by": "Alan",
-                    "repaired_dt": "1986-06-11 4:00:00-07:00",
-                    "priority":  1,
-					"notes": [
-						{ "note_type": "general", "inserted_dt": "1986-06-11 08:30:00-07:00", "note": "the miles aren't coming off" }
-					]
+        {
+            "dvir_id": 1,
+            "vin": "CA1234567890",
+            "defect_code_id": 1,
+            "is_trailer": false,
+            "trailer_name": "",
+            "shipment": "(only for trailers)",
+            "safety_status": true,
+            "inspection_type": "pre",
+            "created_by": 130323,
+            "start_dt": "2017-03-02 22:10:20-07:00",
+            "end_dt": "2017-03-02 22:20:20-07:00",
+            "has_trailers": false,
+            "defects": [{
+                "defect_id": 2,
+                "defect_code_id":  1,
+                "name": "odometer",
+                "repaired_by": "Alan",
+                "repaired_dt": "1986-06-11 4:00:00-07:00",
+                "priority":  1,
+                "notes": [{ 
+                    "note_type": "general", 
+                    "inserted_dt": "1986-06-11 08:30:00-07:00", 
+                    "note": "the miles aren't coming off" 
                 }]
-            }
+            }]
+        }
 
 ### DVIR List [GET /dvir{?limit}{?vehicle}]
 
 + Parameters
 
     + limit (optional, number) ... Maximum number of DVIRs to retreive
-	+ vehicle (optional, String) ... Vehicle context of your request (VIN, descriptor, serial number, etc.) Defaults to assigned vehicle.
+    + vehicle (optional, String) ... Vehicle context of your request (VIN, descriptor, serial number, etc.) Defaults to assigned vehicle.
 
 + Request
     Retrieves the list of dvirs
@@ -585,38 +588,40 @@ In the current incarnation, it returns the GPS points for the last movement trip
 
 + Response 200 (application/json)
 
-            [{
-                "dvir_id": 1,
-                "vin": "CA1234567890",
-                "defect_code_id": 1,
-                "is_trailer": false,
-                "trailer_name": "",
-                "shipment": "(only for trailers)",
-                "safety_status": true,
-                "inspection_type": "pre",
-                "created_by": 130323,
-                "start_dt": "2017-03-02 22:10:20-07:00",
-                "end_dt": "2017-03-02 22:20:20-07:00",
-				"has_trailers": false,
-                "defects": [{
-                    "defect_id": 2,
-                    "defect_code_id":  1,
-                    "name": "odometer",
-                    "repaired_by": "Alan",
-                    "repaired_dt": "1986-06-11 4:00:00-07:00",
-                    "priority":  1,
-					"notes": [
-						{ "note_type": "general", "inserted_dt": "1986-06-11 08:30:00-07:00", "note": "the miles aren't coming off" }
-					]
+        [{
+            "dvir_id": 1,
+            "vin": "CA1234567890",
+            "defect_code_id": 1,
+            "is_trailer": false,
+            "trailer_name": "",
+            "shipment": "(only for trailers)",
+            "safety_status": true,
+            "inspection_type": "pre",
+            "created_by": 130323,
+            "start_dt": "2017-03-02 22:10:20-07:00",
+            "end_dt": "2017-03-02 22:20:20-07:00",
+            "has_trailers": false,
+            "defects": [{
+                "defect_id": 2,
+                "defect_code_id":  1,
+                "name": "odometer",
+                "repaired_by": "Alan",
+                "repaired_dt": "1986-06-11 4:00:00-07:00",
+                "priority":  1,
+                "notes": [{ 
+                    "note_type": "general", 
+                    "inserted_dt": "1986-06-11 08:30:00-07:00", 
+                    "note": "the miles aren't coming off" 
                 }]
-            }, ...
-            ]
+            }]
+        }, ...
+        ]
 
 ### Latest Trailer DVIRs [GET /dvir/trailers/latest{?vehicle}]
 
 + Parameters
 
-	+ vehicle (optional, String) ... Vehicle context of your request (VIN, descriptor, serial number, etc.) Defaults to assigned vehicle.
+    + vehicle (optional, String) ... Vehicle context of your request (VIN, descriptor, serial number, etc.) Defaults to assigned vehicle.
 
 + Request
     Retrieves the latest DVIR records for the trailers associated to the vehicle specified.
@@ -627,22 +632,21 @@ In the current incarnation, it returns the GPS points for the last movement trip
 
 + Response 200 (application/json)
 
-            [
-			{
-                "dvir_id": 191,
-                "vin": "CA1234567890",
-                "is_trailer": true,
-                "trailer_name": "Trailer010",
-                "shipment": "119131",
-                "safety_status": true,
-                "inspection_type": "pre",
-                "created_by": 130323,
-                "start_dt": "2017-03-02 22:10:20-07:00",
-                "end_dt": "2017-03-02 22:20:20-07:00",
-				"has_trailers": false,
-                "defects": []
-            }, ...
-			]
+        [{
+            "dvir_id": 191,
+            "vin": "CA1234567890",
+            "is_trailer": true,
+            "trailer_name": "Trailer010",
+            "shipment": "119131",
+            "safety_status": true,
+            "inspection_type": "pre",
+            "created_by": 130323,
+            "start_dt": "2017-03-02 22:10:20-07:00",
+            "end_dt": "2017-03-02 22:20:20-07:00",
+            "has_trailers": false,
+            "defects": []
+        }, ...
+        ]
 
 ### Create a DVIR [POST  /dvir]
 
@@ -663,8 +667,8 @@ In the current incarnation, it returns the GPS points for the last movement trip
                 "start_dt": "2017-03-02 22:10:20-07:00",
                 "end_dt": "2017-03-02 22:20:20-07:00"
                 defects: [{
-					"defect_code_id': 1,
-					"sub_defect_code_id": 3,
+                    "defect_code_id': 1,
+                    "sub_defect_code_id": 3,
                     "priority":  1
                 }]
             }
@@ -793,7 +797,7 @@ In the current incarnation, it returns the GPS points for the last movement trip
             {
                 "repaired_by": "Johnny Wrench",
                 "repaired_dt": "2016-10-01T09:50:00-7:00"
-				"priority": 0
+                "priority": 0
             }
 
 + Response 200 (application/json)
