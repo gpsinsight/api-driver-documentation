@@ -130,7 +130,7 @@ Include `X-Channel` and additionally `X-Channel-Version` (if applicable) in orde
             X-Channel: <Valid channel ID>
 
     + Body
-
+    
             {
                 "token": "adef3434931bef4aa132312"
             }
@@ -394,7 +394,7 @@ Include `X-Channel` and additionally `X-Channel-Version` (if applicable) in orde
             "start_address": "9350 E Golden St, Mesa, AZ 85207",
             "end_address": "Frontage Rd, Scottsdale, AZ 85255",
             "points": [
-                {
+                { 
                     'fix_time_utf': '2017-06-15 14:23:32',
                     'latitude': '39.223889',
                     'longitude': '-108.865'
@@ -469,6 +469,23 @@ Include `X-Channel` and additionally `X-Channel-Version` (if applicable) in orde
                 "gpsi_vehicle_id":"7500201366",
                 "license_state":"AZ",
                 "license_number":"ABC890"
+            },
+            { ... }
+        ]
+        
+### Get Driver Notification Tokens [GET /info/notif_tokens{?driver_id}{?phone_number}]
+
++ Parameters
+
+    + driver_id: 14512311 (Number, optional) - Driver ID to look up
+    + phone_number: 6025551234 (Number, optional) - Phone number of driver to look up
+
++ Response 200
+
+        [
+            {
+                "token_type": "fcm",
+                "token": "APA91bHPRgkF3JUikC4ENAHEeMrd41Zxv3hVZjC9KtT8OvPVGJ-hQMRKRrZuJAEcl7B338qju59zJMjw2DELjzEvxwYv7hH5Ynpc1ODQ0aT4U4OFEeco8ohsN5PjL1iC2dNtk2BAokeMCg2ZXKqpc8FXKmhX94kIxQ"
             },
             { ... }
         ]
@@ -564,10 +581,10 @@ Include `X-Channel` and additionally `X-Channel-Version` (if applicable) in orde
                 "repaired_by": "Alan",
                 "repaired_dt": "1986-06-11 4:00:00-07:00",
                 "priority":  1,
-                "notes": [{
-                    "note_type": "general",
-                    "inserted_dt": "1986-06-11 08:30:00-07:00",
-                    "note": "the miles aren't coming off"
+                "notes": [{ 
+                    "note_type": "general", 
+                    "inserted_dt": "1986-06-11 08:30:00-07:00", 
+                    "note": "the miles aren't coming off" 
                 }]
             }]
         }
@@ -608,10 +625,10 @@ Include `X-Channel` and additionally `X-Channel-Version` (if applicable) in orde
                 "repaired_by": "Alan",
                 "repaired_dt": "1986-06-11 4:00:00-07:00",
                 "priority":  1,
-                "notes": [{
-                    "note_type": "general",
-                    "inserted_dt": "1986-06-11 08:30:00-07:00",
-                    "note": "the miles aren't coming off"
+                "notes": [{ 
+                    "note_type": "general", 
+                    "inserted_dt": "1986-06-11 08:30:00-07:00", 
+                    "note": "the miles aren't coming off" 
                 }]
             }]
         }, ...

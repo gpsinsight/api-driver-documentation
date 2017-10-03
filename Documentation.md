@@ -472,6 +472,23 @@ Include `X-Channel` and additionally `X-Channel-Version` (if applicable) in orde
             },
             { ... }
         ]
+		
+### Get Driver Notification Tokens [GET /info/notif_tokens{?driver_id}{?phone_number}]
+
++ Parameters
+
+    + driver_id: 14512311 (Number, optional) - Driver ID to look up
+    + phone_number: 6025551234 (Number, optional) - Phone number of driver to look up
+
++ Response 200
+
+        [
+			{
+				"token_type": "fcm",
+				"token": "APA91bHPRgkF3JUikC4ENAHEeMrd41Zxv3hVZjC9KtT8OvPVGJ-hQMRKRrZuJAEcl7B338qju59zJMjw2DELjzEvxwYv7hH5Ynpc1ODQ0aT4U4OFEeco8ohsN5PjL1iC2dNtk2BAokeMCg2ZXKqpc8FXKmhX94kIxQ"
+			},
+			{ ... }
+		]
 
 ## Driver Assignment [/assign]
 
