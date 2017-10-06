@@ -483,10 +483,12 @@ Include `X-Channel` and additionally `X-Channel-Version` (if applicable) in orde
 + Request
 
     _NOTE:_ This is a _service endpoint_, and therefore requires a valid _API app token_ to access.
+    _NOTE:_ This service endpoints _requires_ the _Account Context_ header to increase driver precision.
 
     + Headers
     
             X-App-Token: <Valid API app token>
+            X-Account-Context: <Account ID>
 
 + Response 200
 
