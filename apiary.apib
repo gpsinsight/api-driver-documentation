@@ -70,6 +70,22 @@ Include `X-Channel` and additionally `X-Channel-Version` (if applicable) in orde
             "session": <session_token>
         }
 
+### Session Revoke [POST /session/revoke]
+
++ Request
+    Subsequent to this request, the session token specified will no longer be valid!
+
+    + Headers
+
+            Session: <Valid session token>
+
++ Response 200
+
+        {
+            "success": true
+        }
+
+
 ### Session Data Refresh [GET /session]
 
 + Request
