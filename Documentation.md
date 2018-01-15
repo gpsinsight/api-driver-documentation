@@ -199,6 +199,7 @@ Include `X-Channel` and additionally `X-Channel-Version` (if applicable) in orde
 ### Send a Message [POST /message]
 
 + Request (application/json)
+	To send to other drivers, specify the driver's phone number in the _to_ field. For sending to the server, specify `server` in the _to_ field.
 
     + Headers
 
@@ -208,9 +209,8 @@ Include `X-Channel` and additionally `X-Channel-Version` (if applicable) in orde
     + Body
 
             {
-                "to": "user",
+                "to": "6025558801",
                 "message": "A message",
-                "from_device": "device_id",
                 "created_time": "(optional) defaults to time of request",
                 "read_dt": "(optional) automatically set read timestamp to provided time",
                 "deleted_dt": "(optional) automatically set deleted timestamp to provided time",
