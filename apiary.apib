@@ -320,7 +320,7 @@ Include `X-Channel` and additionally `X-Channel-Version` (if applicable) in orde
                 "to": "Driver001",
                 "latitude": 121.191,
                 "longitude": -100.231,
-                "address": "3210 N Butte St. Bremerton, WA 96753",
+                "address": "3210 N Butte St., Bremerton, WA 96753",
                 "note": "A really important note.",
                 "timestamp": "2015-08-05T08:40:51",
                 "read_dt": null,
